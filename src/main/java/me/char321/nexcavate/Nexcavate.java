@@ -1,13 +1,13 @@
 package me.char321.nexcavate;
 
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
+import me.char321.nexcavate.gui.NEGUI;
 import me.char321.nexcavate.items.Items;
-import me.char321.nexcavate.slimefun.NexcavateItemGroup;
+import me.char321.nexcavate.slimefun.NEItemGroup;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 public final class Nexcavate extends JavaPlugin implements SlimefunAddon {
     private static Nexcavate instance;
@@ -23,8 +23,9 @@ public final class Nexcavate extends JavaPlugin implements SlimefunAddon {
     @Override
     public void onEnable() {
         // Plugin startup logic
+        NEGUI.init();
         Items.init();
-        NexcavateItemGroup.init();
+        NEItemGroup.init();
     }
 
     @Override
@@ -46,5 +47,9 @@ public final class Nexcavate extends JavaPlugin implements SlimefunAddon {
     @Nonnull
     public static NamespacedKey key(@Nonnull String key) {
         return new NamespacedKey(instance, key);
+    }
+
+    public static void info(String msg) {
+        instance.getLogger().info(msg);
     }
 }
