@@ -13,8 +13,8 @@ public interface StructurePiece {
 
     EnumMap<Material, StructurePiece> literals = new EnumMap<>(Material.class);
 
-    static StructurePiece lit(Material m) {
-        return literals.computeIfAbsent(m, LiteralStructurePiece::new);
+    static StructurePiece mat(Material m) {
+        return literals.computeIfAbsent(m, MaterialStructurePiece::new);
     }
 
     static StructurePiece u(ItemStack display, StructurePiece... pieces) {

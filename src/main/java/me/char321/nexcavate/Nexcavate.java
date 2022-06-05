@@ -3,6 +3,8 @@ package me.char321.nexcavate;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import me.char321.nexcavate.gui.NEGUI;
 import me.char321.nexcavate.items.Items;
+import me.char321.nexcavate.research.Researches;
+import me.char321.nexcavate.research.progress.ProgressManager;
 import me.char321.nexcavate.slimefun.NEItemGroup;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -11,6 +13,8 @@ import javax.annotation.Nonnull;
 
 public final class Nexcavate extends JavaPlugin implements SlimefunAddon {
     private static Nexcavate instance;
+    private NexcavateRegistry registry;
+    private ProgressManager progressManager;
 
     public Nexcavate() {
         instance = this;
@@ -23,8 +27,12 @@ public final class Nexcavate extends JavaPlugin implements SlimefunAddon {
     @Override
     public void onEnable() {
         // Plugin startup logic
+        registry = new NexcavateRegistry();
+        progressManager = new ProgressManager();
+
         NEGUI.init();
         Items.init();
+        Researches.init();
         NEItemGroup.init();
     }
 
@@ -42,6 +50,14 @@ public final class Nexcavate extends JavaPlugin implements SlimefunAddon {
     @Override
     public String getBugTrackerURL() {
         return "https://github.com/qwertyuioplkjhgfd/Nexcavate/issues";
+    }
+
+    public NexcavateRegistry getRegistry() {
+        return registry;
+    }
+
+    public ProgressManager getProgressManager() {
+        return progressManager;
     }
 
     @Nonnull

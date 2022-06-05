@@ -4,10 +4,10 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 
-public class LiteralStructurePiece implements StructurePiece {
+public class MaterialStructurePiece implements StructurePiece {
     private final Material material;
 
-    public LiteralStructurePiece(Material material) {
+    public MaterialStructurePiece(Material material) {
         this.material = material;
     }
 

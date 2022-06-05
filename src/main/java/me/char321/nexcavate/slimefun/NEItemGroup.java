@@ -5,11 +5,10 @@ import io.github.thebusybiscuit.slimefun4.api.player.PlayerProfile;
 import io.github.thebusybiscuit.slimefun4.core.guide.SlimefunGuideMode;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import me.char321.nexcavate.Nexcavate;
-import org.bukkit.Bukkit;
+import me.char321.nexcavate.gui.NEGUI;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -33,7 +32,6 @@ public class NEItemGroup extends FlexItemGroup {
 
     @Override
     public void open(Player p, PlayerProfile profile, SlimefunGuideMode layout) {
-        Inventory inventory = Bukkit.createInventory(null, 54, "Slimefun Guide");
-        p.openInventory(inventory);
+        NEGUI.openResearchScreen(p, 0);
     }
 }

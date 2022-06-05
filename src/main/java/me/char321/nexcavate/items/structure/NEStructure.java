@@ -7,7 +7,7 @@ import org.bukkit.inventory.ItemStack;
  * slimefunitem requiring a 3d structure
  */
 public class NEStructure extends NEItem {
-    private final Structure structure;
+    protected final Structure structure;
 
     public NEStructure(ItemStack item, String id, Structure structure) {
         super(item, id);

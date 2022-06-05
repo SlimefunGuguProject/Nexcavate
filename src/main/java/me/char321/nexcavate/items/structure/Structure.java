@@ -1,11 +1,9 @@
 package me.char321.nexcavate.items.structure;
 
-import me.char321.nexcavate.Nexcavate;
-import me.char321.nexcavate.items.structure.piece.LiteralStructurePiece;
+import me.char321.nexcavate.items.structure.piece.MaterialStructurePiece;
 import me.char321.nexcavate.items.structure.piece.StructurePiece;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
 
 /**
  * a 3d structure of blocks
@@ -38,6 +36,7 @@ public class Structure {
      * @return whether this structure is valid with this block as the centerpiece
      */
     public boolean validate(Location center) {
+        //TODO: check command
         for (int orientation = 0; orientation < 4; orientation++) {
             if (validateOrientation(center, orientation)) {
                 return true;
@@ -102,7 +101,7 @@ public class Structure {
         for (int i = 0; i < materials.length; i++) {
             for (int ii = 0; ii < materials[i].length; ii++) {
                 for (int iii = 0; iii < materials[i][ii].length; iii++) {
-                    structure[i][ii][iii] = new LiteralStructurePiece(materials[i][ii][iii]);
+                    structure[i][ii][iii] = new MaterialStructurePiece(materials[i][ii][iii]);
                 }
             }
         }
