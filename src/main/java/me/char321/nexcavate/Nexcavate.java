@@ -4,12 +4,16 @@ import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import me.char321.nexcavate.gui.NEGUI;
 import me.char321.nexcavate.items.Items;
 import me.char321.nexcavate.research.Researches;
+import me.char321.nexcavate.research.progress.AutoSaveTask;
 import me.char321.nexcavate.research.progress.ProgressManager;
+import me.char321.nexcavate.research.progress.ResearchUpdateTask;
 import me.char321.nexcavate.slimefun.NEItemGroup;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.annotation.Nonnull;
+import java.io.IOException;
+import java.util.logging.Level;
 
 public final class Nexcavate extends JavaPlugin implements SlimefunAddon {
     private static Nexcavate instance;
@@ -34,11 +38,24 @@ public final class Nexcavate extends JavaPlugin implements SlimefunAddon {
         Items.init();
         Researches.init();
         NEItemGroup.init();
+
+        AutoSaveTask.init();
+        ResearchUpdateTask.init();
     }
 
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+        save();
+    }
+
+    public void save() {
+        try {
+            Nexcavate.instance().getProgressManager().save();
+        } catch (IOException e) {
+            Nexcavate.instance().getLogger().log(Level.SEVERE, e, () -> "Could not save player progress");
+            e.printStackTrace();
+        }
     }
 
     @Nonnull

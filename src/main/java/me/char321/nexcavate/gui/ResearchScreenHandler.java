@@ -80,6 +80,7 @@ public class ResearchScreenHandler implements NEGUIInventoryHolder {
 
     @Override
     public void click(InventoryClickEvent e) {
+        refresh(currentTier);
         Research research = researchSlots.get(e.getRawSlot());
         if (research == null) {
             return;
@@ -92,7 +93,7 @@ public class ResearchScreenHandler implements NEGUIInventoryHolder {
             if (playerProgress.getCurrentResearchProgress() == null) {
                 playerProgress.beginResearch(research);
             } else {
-                e.getWhoClicked().sendMessage("&cYou are already researching &f" + playerProgress.getCurrentResearch().getName() + "&c!");
+                e.getWhoClicked().sendMessage(ChatColor.translateAlternateColorCodes('&', "&cYou are already researching &f" + playerProgress.getCurrentResearch().getName() + "&c!"));
             }
             refresh(currentTier);
         }

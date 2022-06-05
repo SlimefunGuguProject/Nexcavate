@@ -6,12 +6,17 @@ import com.google.gson.annotations.SerializedName;
 import me.char321.nexcavate.Nexcavate;
 import me.char321.nexcavate.research.Research;
 import me.char321.nexcavate.research.Researches;
+import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -32,6 +37,17 @@ public class PlayerProgress {
 
         //unlocked by default
         researches.add(Researches.RESEARCH_TABLE.getKey());
+    }
+
+    public static PlayerProgress load(File f, UUID player) {
+        try {
+            PlayerProgress res = GSON.fromJson(new BufferedReader(new FileReader(f)), PlayerProgress.class);
+            res.player = player;
+            return res;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return new PlayerProgress(player);
+        }
     }
 
     public List<NamespacedKey> getResearches() {
@@ -88,6 +104,23 @@ public class PlayerProgress {
         }
 
         currentResearchProgress = new ResearchProgress(research, System.currentTimeMillis());
+        Bukkit.getScheduler().runTaskLaterAsynchronously(Nexcavate.instance(), () -> Bukkit.getScheduler().runTask(Nexcavate.instance(), this::completeCurrentResearch), research.getTime() * 20L * 60L);
+    }
+
+    public void completeCurrentResearch() {
+        if (currentResearchProgress != null) {
+            researches.add(currentResearchProgress.research.getKey());
+            currentResearchProgress = null;
+        }
+    }
+
+    public void tryCompleteCurrentResearch() {
+        if (currentResearchProgress == null) {
+            return;
+        }
+        if (System.currentTimeMillis() > currentResearchProgress.startTime + (currentResearchProgress.research.getTime() * 60L * 1000L)) {
+            completeCurrentResearch();
+        }
     }
 
     public static class ResearchProgress {
@@ -109,7 +142,7 @@ public class PlayerProgress {
 
         public String currentProgress() {
             double time = (System.currentTimeMillis() - startTime) / 60000.0;
-            return String.format("%.2g%n", time) + " / " + research.getTime() + " minutes (" + String.format("%.2g%n", time / research.getTime() * 100.0) +"%)";
+            return String.format("%.2f", time) + " / " + research.getTime() + " minutes (" + String.format("%.2f", time / research.getTime() * 100.0) +"%)";
         }
     }
 }
