@@ -72,7 +72,7 @@ public class Items {
                         {mat(SMOOTH_QUARTZ), mat(NETHERITE_BLOCK), mat(NETHERITE_BLOCK), mat(SMOOTH_QUARTZ)},
                         {mat(SMOOTH_QUARTZ), mat(SMOOTH_QUARTZ), mat(SMOOTH_QUARTZ), mat(SMOOTH_QUARTZ)},
                 }, {
-                        {mat(SMOOTH_QUARTZ), mat(FLETCHING_TABLE), mat(BASALT), mat(SMOOTH_QUARTZ)},
+                        {mat(SMOOTH_QUARTZ), mat(FLETCHING_TABLE), mat(BASALT), mat(SMOOTH_QUARTZ)}, //TODO analysis core
                         {mat(WHITE_STAINED_GLASS_PANE), mat(AIR), mat(AIR), mat(WHITE_STAINED_GLASS_PANE)},
                         {mat(WHITE_STAINED_GLASS_PANE), mat(AIR), mat(AIR), mat(WHITE_STAINED_GLASS_PANE)},
                         {mat(WHITE_STAINED_GLASS_PANE), mat(AIR), mat(AIR), mat(WHITE_STAINED_GLASS_PANE)},

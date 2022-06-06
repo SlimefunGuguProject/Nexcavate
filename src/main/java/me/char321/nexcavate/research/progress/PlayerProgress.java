@@ -2,7 +2,11 @@ package me.char321.nexcavate.research.progress;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
 import me.char321.nexcavate.Nexcavate;
 import me.char321.nexcavate.research.Research;
 import me.char321.nexcavate.research.Researches;
@@ -16,14 +20,19 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Reader;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 public class PlayerProgress {
     private static final Gson GSON = new GsonBuilder()
             .registerTypeHierarchyAdapter(NamespacedKey.class, new NamespacedKeyAdapter())
+            .registerTypeAdapter(Research.class, new ResearchAdapter())
             .create();
 
     private transient UUID player;
@@ -31,6 +40,7 @@ public class PlayerProgress {
     private boolean completedTutorial; //TODO tutorial
     private List<NamespacedKey> researches = new ArrayList<>();
     private ResearchProgress currentResearchProgress;
+
 
     public PlayerProgress(UUID player) {
         this.player = player;
@@ -44,7 +54,7 @@ public class PlayerProgress {
             PlayerProgress res = GSON.fromJson(new BufferedReader(new FileReader(f)), PlayerProgress.class);
             res.player = player;
             return res;
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
             return new PlayerProgress(player);
         }

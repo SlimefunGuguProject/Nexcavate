@@ -1,6 +1,8 @@
 package me.char321.nexcavate.research;
 
 import me.char321.nexcavate.Nexcavate;
+import me.char321.nexcavate.NexcavateRegistry;
+import me.char321.nexcavate.items.NEItem;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 
@@ -8,6 +10,7 @@ import java.util.Objects;
 
 public class Research {
     private final NamespacedKey key;
+    private final NEItem item;
     private final ItemStack display;
     private final int tier;
     private final int category;
@@ -23,8 +26,9 @@ public class Research {
      * @param cost
      * @param time in minutes
      */
-    public Research(NamespacedKey key, ItemStack display, int tier, int category, int cost, int time) {
+    public Research(NamespacedKey key, NEItem item, ItemStack display, int tier, int category, int cost, int time) {
         this.key = key;
+        this.item = item;
         this.display = display;
         this.tier = tier;
         this.category = category;
@@ -44,8 +48,18 @@ public class Research {
         return tier;
     }
 
+    /**
+     *
+     * @return the SlimefunItem that this research unlocks
+     */
+    public NEItem getItem() {
+        return item;
+    }
+
     public void register() {
-        Nexcavate.instance().getRegistry().getResearches().add(this);
+        NexcavateRegistry registry = Nexcavate.instance().getRegistry();
+        registry.getResearches().add(this);
+        registry.getResearchMap().put(key, this);
     }
 
     public int getCategory() {

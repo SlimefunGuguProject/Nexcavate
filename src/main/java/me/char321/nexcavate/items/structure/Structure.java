@@ -11,10 +11,12 @@ import org.bukkit.Material;
 public class Structure {
     private final StructurePiece[][][] structure;
     private final int[] center;
+    public final int size;
 
     public Structure(StructurePiece[][][] structure, int[] center) {
         this.structure = structure;
         this.center = center;
+        this.size = structure.length;
     }
 
     public StructurePiece[][][] getPieces() {
