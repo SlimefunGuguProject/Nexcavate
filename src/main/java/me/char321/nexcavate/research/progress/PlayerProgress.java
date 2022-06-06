@@ -12,6 +12,7 @@ import me.char321.nexcavate.research.Research;
 import me.char321.nexcavate.research.Researches;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
+import org.bukkit.entity.Player;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -41,14 +42,6 @@ public class PlayerProgress {
     private List<NamespacedKey> researches = new ArrayList<>();
     private ResearchProgress currentResearchProgress;
 
-
-    public PlayerProgress(UUID player) {
-        this.player = player;
-
-        //unlocked by default
-        researches.add(Researches.RESEARCH_TABLE.getKey());
-    }
-
     public static PlayerProgress load(File f, UUID player) {
         try {
             PlayerProgress res = GSON.fromJson(new BufferedReader(new FileReader(f)), PlayerProgress.class);
@@ -58,6 +51,21 @@ public class PlayerProgress {
             e.printStackTrace();
             return new PlayerProgress(player);
         }
+    }
+
+    public static PlayerProgress get(Player player) {
+        return get(player.getUniqueId());
+    }
+
+    public static PlayerProgress get(UUID player) {
+        return Nexcavate.instance().getProgressManager().get(player);
+    }
+
+    public PlayerProgress(UUID player) {
+        this.player = player;
+
+        //unlocked by default
+        researches.add(Researches.RESEARCH_TABLE.getKey());
     }
 
     public List<NamespacedKey> getResearches() {
@@ -131,6 +139,10 @@ public class PlayerProgress {
         if (System.currentTimeMillis() > currentResearchProgress.startTime + (currentResearchProgress.research.getTime() * 60L * 1000L)) {
             completeCurrentResearch();
         }
+    }
+
+    public boolean hasCompletedTutorial() {
+        return completedTutorial;
     }
 
     public static class ResearchProgress {

@@ -4,6 +4,7 @@ import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import me.char321.nexcavate.Nexcavate;
 import me.char321.nexcavate.research.Research;
 import me.char321.nexcavate.research.progress.PlayerProgress;
+import me.char321.nexcavate.research.progress.ProgressManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -54,7 +55,7 @@ public class ResearchScreenHandler implements NEGUIInventoryHolder {
 
     private ItemStack getDisplay(Research research) {
         ItemStack res = research.getDisplay();
-        PlayerProgress playerProgress = Nexcavate.instance().getProgressManager().get(player);
+        PlayerProgress playerProgress = PlayerProgress.get(player);
         if (research.equals(playerProgress.getCurrentResearch())) {
             PlayerProgress.ResearchProgress progress = playerProgress.getCurrentResearchProgress();
             res = res.clone();
@@ -91,7 +92,7 @@ public class ResearchScreenHandler implements NEGUIInventoryHolder {
             return;
         }
 
-        PlayerProgress playerProgress = Nexcavate.instance().getProgressManager().get(player);
+        PlayerProgress playerProgress = PlayerProgress.get(player);
         if (playerProgress.isResearched(research)) {
             NEGUI.openRecipe((Player)e.getWhoClicked(), researchSlots.get(e.getRawSlot()));
         } else if (currentTier >= research.getTier()) {
