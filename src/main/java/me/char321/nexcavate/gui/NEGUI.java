@@ -1,5 +1,7 @@
 package me.char321.nexcavate.gui;
 
+import io.github.thebusybiscuit.slimefun4.api.player.PlayerProfile;
+import io.github.thebusybiscuit.slimefun4.core.guide.SlimefunGuide;
 import me.char321.nexcavate.Nexcavate;
 import me.char321.nexcavate.gui.structurescreen.StructureScreenHandler;
 import me.char321.nexcavate.items.structure.NEStructure;
@@ -59,6 +61,11 @@ public class NEGUI {
     public static void openRecipe(Player player, Research research) {
         if (research.getItem() instanceof NEStructure) {
             openStructure(player, ((NEStructure) research.getItem()).getStructure());
+        } else {
+            //fallback
+            PlayerProfile.get(player, profile -> {
+                SlimefunGuide.displayItem(profile, research.getItem(), false);
+            });
         }
     }
 }

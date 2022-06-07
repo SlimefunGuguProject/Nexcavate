@@ -1,23 +1,27 @@
 package me.char321.nexcavate.items.tools;
 
-import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ToolUseHandler;
+import me.char321.nexcavate.items.Items;
 import me.char321.nexcavate.items.NEItem;
-import org.bukkit.Material;
-import org.bukkit.event.block.BlockBreakEvent;
+import me.char321.nexcavate.items.tools.loot.LootTable;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
-
 public class RediscoveryPickaxe extends NEItem {
-    private final Map<Material, Float> partChances = new EnumMap<>(Material.class);
+    private final LootTable lootTable;
 
-    public RediscoveryPickaxe(ItemStack item, String id) {
-        super(item, id);
+    public RediscoveryPickaxe(ItemStack item, String id, RecipeType type, ItemStack[] recipe, LootTable table) {
+        super(item, id, type, recipe);
+        this.lootTable = table;
         addItemHandler((ToolUseHandler) (e, tool, fortune, drops) -> {
-
+            ItemStack drop = lootTable.poll(e.getBlock().getType());
+            if (drop != null) {
+                drops.add(drop);
+            }
         });
+    }
+
+    public RediscoveryPickaxe(ItemStack item, String id, LootTable lootTable) {
+        this(item, id, Items.DUMMY_TYPE, new ItemStack[9], lootTable);
     }
 }

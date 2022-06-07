@@ -1,12 +1,17 @@
 package me.char321.nexcavate.items;
 
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import me.char321.nexcavate.Nexcavate;
 import me.char321.nexcavate.items.stations.ResearchStation;
 import me.char321.nexcavate.items.structure.Structure;
 import me.char321.nexcavate.items.structure.piece.StructurePiece;
+import me.char321.nexcavate.items.tools.RediscoveryPickaxe;
+import me.char321.nexcavate.items.tools.loot.LootTables;
+import me.char321.nexcavate.items.tools.loot.ProbabilityLootTable;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -42,13 +47,17 @@ public class Items {
             Material.BARRIER,
             "&l&4You're viewing this recipe wrong!",
             "&7View the recipe through a Nexcavate research station."));
-    public static ResearchStation RESEARCH_LAB;
 
+    public static ResearchStation RESEARCH_LAB;
     public static ResearchStation RESEARCH_TABLE;
+
+    public static RediscoveryPickaxe REDISCOVERY_PICKAXE;
+
+    public static NEItem ANCIENT_PART;
 
     public static void init() {
         StructurePiece lantern = u(new CustomItemStack(LANTERN, "Lantern/Soul Lantern"), mat(LANTERN), mat(SOUL_LANTERN));
-        RESEARCH_TABLE = new ResearchStation(new CustomItemStack(CARTOGRAPHY_TABLE, "&eResearch Table"), "NE_RESEARCH_TABLE", new Structure(new StructurePiece[][][]{
+        RESEARCH_TABLE = new ResearchStation(ItemStacks.RESEARCH_TABLE, "NE_RESEARCH_TABLE", new Structure(new StructurePiece[][][]{
                 {
                         {mat(SMOOTH_QUARTZ), mat(SMOOTH_QUARTZ), mat(SMOOTH_QUARTZ)},
                         {mat(SMOOTH_QUARTZ), mat(NETHERITE_BLOCK), mat(SMOOTH_QUARTZ)},
@@ -65,7 +74,7 @@ public class Items {
         }, new int[]{1, 0, 1}), 1);
         RESEARCH_TABLE.register();
 
-        RESEARCH_LAB = new ResearchStation(new CustomItemStack(FLETCHING_TABLE, "&eResearch Lab"), "NE_RESEARCH_LAB", new Structure(new StructurePiece[][][]{
+        RESEARCH_LAB = new ResearchStation(ItemStacks.RESEARCH_LAB, "NE_RESEARCH_LAB", new Structure(new StructurePiece[][][]{
                 {
                         {mat(SMOOTH_QUARTZ), mat(SMOOTH_QUARTZ), mat(SMOOTH_QUARTZ), mat(SMOOTH_QUARTZ)},
                         {mat(SMOOTH_QUARTZ), mat(NETHERITE_BLOCK), mat(NETHERITE_BLOCK), mat(SMOOTH_QUARTZ)},
@@ -91,6 +100,15 @@ public class Items {
         RESEARCH_LAB.register();
 
         //research facility smithing
+
+        ItemStack pbb = new ItemStack(Material.POLISHED_BLACKSTONE_BRICKS);
+        ItemStack stick = new ItemStack(Material.STICK);
+        REDISCOVERY_PICKAXE = new RediscoveryPickaxe(ItemStacks.REDISCOVERY_PICKAXE, "NE_REDISCOVERY_PICKAXE", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
+                pbb, SlimefunItems.PICKAXE_OF_THE_SEEKER, pbb,
+                null, stick, null,
+                null, stick, null
+        }, LootTables.REDISCOVERY_PICKAXE);
+        REDISCOVERY_PICKAXE.register();
     }
 
 }
