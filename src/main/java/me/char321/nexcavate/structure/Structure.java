@@ -1,7 +1,7 @@
-package me.char321.nexcavate.items.structure;
+package me.char321.nexcavate.structure;
 
-import me.char321.nexcavate.items.structure.piece.MaterialStructurePiece;
-import me.char321.nexcavate.items.structure.piece.StructurePiece;
+import me.char321.nexcavate.structure.piece.MaterialStructurePiece;
+import me.char321.nexcavate.structure.piece.StructurePiece;
 import org.bukkit.Location;
 import org.bukkit.Material;
 
@@ -39,15 +39,42 @@ public class Structure {
      */
     public boolean validate(Location center) {
         //TODO: check command
-        for (int orientation = 0; orientation < 4; orientation++) {
-            if (validateOrientation(center, orientation)) {
-                return true;
-            }
-        }
-        return false;
+        return orientation(center) != -1;
     }
 
-    private boolean validateOrientation(Location center, int orientation) {
+    /**
+     * same as validate but returns which orientation the thing is in
+     *
+     * @param center the location of the block which should be the centerpiece
+     * @return the orientation of the structure<br>
+     * <table style="margin:3px">
+     *   <tr>
+     *     <td> orientation </td> <td> facing</td>
+     *   </tr>
+     *   <tr>
+     *     <td> 0 </td> <td> -z </td>
+     *   </tr>
+     *   <tr>
+     *     <td> 1 </td> <td> +x </td>
+     *   </tr>
+     *   <tr>
+     *     <td> 2 </td> <td> +z </td>
+     *   </tr>
+     *   <tr>
+     *     <td> 3 </td> <td> -x </td>
+     *   </tr>
+     * </table>
+     */
+    public int orientation(Location center) {
+        for (int orientation = 0; orientation < 4; orientation++) {
+            if (validateOrientation(center, orientation)) {
+                return orientation;
+            }
+        }
+        return -1;
+    }
+
+    public boolean validateOrientation(Location center, int orientation) {
         for (int layer = 0; layer < structure.length; layer++) {
             if (!validateLayer(center, layer, orientation)) {
                 return false;
@@ -60,7 +87,7 @@ public class Structure {
         StructurePiece[][] layer = structure[layerIndex];
         for (int z = 0; z < layer.length; z++) {
             for (int x = 0; x < layer[z].length; x++) {
-                int dy = layerIndex - center[0];
+                int dy = layerIndex - center[0]; //if center is origin
                 int dz = z - center[1];
                 int dx = x - center[2];
                 int temp;

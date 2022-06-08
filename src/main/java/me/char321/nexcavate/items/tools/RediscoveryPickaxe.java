@@ -3,7 +3,7 @@ package me.char321.nexcavate.items.tools;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ToolUseHandler;
 import me.char321.nexcavate.items.Items;
-import me.char321.nexcavate.items.NEItem;
+import me.char321.nexcavate.slimefun.NEItem;
 import me.char321.nexcavate.items.tools.loot.LootTable;
 import org.bukkit.inventory.ItemStack;
 

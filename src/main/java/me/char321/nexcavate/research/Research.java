@@ -2,7 +2,7 @@ package me.char321.nexcavate.research;
 
 import me.char321.nexcavate.Nexcavate;
 import me.char321.nexcavate.NexcavateRegistry;
-import me.char321.nexcavate.items.NEItem;
+import me.char321.nexcavate.slimefun.NEItem;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 

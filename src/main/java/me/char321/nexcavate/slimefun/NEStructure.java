@@ -1,6 +1,6 @@
-package me.char321.nexcavate.items.structure;
+package me.char321.nexcavate.slimefun;
 
-import me.char321.nexcavate.items.NEItem;
+import me.char321.nexcavate.structure.Structure;
 import org.bukkit.inventory.ItemStack;
 
 /**

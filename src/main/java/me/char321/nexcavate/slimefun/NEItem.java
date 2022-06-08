@@ -1,8 +1,9 @@
-package me.char321.nexcavate.items;
+package me.char321.nexcavate.slimefun;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import me.char321.nexcavate.Nexcavate;
+import me.char321.nexcavate.items.Items;
 import org.bukkit.inventory.ItemStack;
 
 public class NEItem extends SlimefunItem {

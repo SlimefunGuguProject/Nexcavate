@@ -1,13 +1,17 @@
 package me.char321.nexcavate.gui;
 
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
+import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.char321.nexcavate.Nexcavate;
+import me.char321.nexcavate.items.ItemStacks;
+import me.char321.nexcavate.items.Items;
 import me.char321.nexcavate.research.Research;
 import me.char321.nexcavate.research.progress.PlayerProgress;
 import me.char321.nexcavate.research.progress.ProgressManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
@@ -92,16 +96,47 @@ public class ResearchScreenHandler implements NEGUIInventoryHolder {
             return;
         }
 
+        Player player1 = (Player) e.getWhoClicked();
         PlayerProgress playerProgress = PlayerProgress.get(player);
         if (playerProgress.isResearched(research)) {
-            NEGUI.openRecipe((Player)e.getWhoClicked(), researchSlots.get(e.getRawSlot()));
+            NEGUI.openRecipe(player1, researchSlots.get(e.getRawSlot()));
         } else if (currentTier >= research.getTier()) {
-            if (playerProgress.getCurrentResearchProgress() == null) {
-                playerProgress.beginResearch(research);
-            } else {
+            if (playerProgress.getCurrentResearchProgress() != null) {
                 e.getWhoClicked().sendMessage(ChatColor.translateAlternateColorCodes('&', "&cYou are already researching &f" + playerProgress.getCurrentResearch().getName() + "&c!"));
+            } else if (!canAfford(player1, research)) {
+                e.getWhoClicked().sendMessage(ChatColor.translateAlternateColorCodes('&', "&cYou cannot afford this research! " + research.getCost() + " ancient parts are required."));
+            } else {
+                consumeParts(player1, research);
+                playerProgress.beginResearch(research);
+                player1.playSound(player1, Sound.BLOCK_END_PORTAL_SPAWN, 1, 1);
             }
             refresh();
         }
+    }
+
+    private void consumeParts(Player player, Research research) {
+        int cost = research.getCost();
+
+        for (ItemStack itemStack : player.getInventory().getContents()) {
+            if (SlimefunUtils.isItemSimilar(itemStack, ItemStacks.ANCIENT_PART, true, false)) {
+                int amount = itemStack.getAmount();
+                int toConsume = Math.min(amount, cost);
+                itemStack.setAmount(amount - toConsume);
+                cost -= toConsume;
+                if (cost == 0) {
+                    return;
+                }
+            }
+        }
+    }
+
+    private boolean canAfford(Player player, Research research) {
+        int count = 0;
+        for (ItemStack itemStack : player.getInventory().getContents()) {
+            if (SlimefunUtils.isItemSimilar(itemStack, ItemStacks.ANCIENT_PART, true, false)) {
+                count += itemStack.getAmount();
+            }
+        }
+        return count >= research.getCost();
     }
 }

@@ -2,8 +2,8 @@ package me.char321.nexcavate.items.stations;
 
 import me.char321.nexcavate.Nexcavate;
 import me.char321.nexcavate.gui.NEGUI;
-import me.char321.nexcavate.items.structure.NEStructure;
-import me.char321.nexcavate.items.structure.Structure;
+import me.char321.nexcavate.slimefun.NEStructure;
+import me.char321.nexcavate.structure.Structure;
 import me.char321.nexcavate.research.progress.PlayerProgress;
 import me.char321.nexcavate.util.Utils;
 import org.bukkit.Bukkit;
@@ -15,8 +15,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-
-import java.util.Arrays;
 
 public class ResearchStation extends NEStructure implements Listener {
     private final int tier;
@@ -32,6 +30,7 @@ public class ResearchStation extends NEStructure implements Listener {
         if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) && e.getClickedBlock() != null && structure.getCenterPiece().isValid(e.getClickedBlock())) {
             if (structure.validate(e.getClickedBlock().getLocation())) {
                 e.setCancelled(true);
+                info("orientation " + structure.orientation(e.getClickedBlock().getLocation()));
                 handleClick(e.getPlayer());
             }
         }

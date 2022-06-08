@@ -1,4 +1,4 @@
-package me.char321.nexcavate.items.structure.piece;
+package me.char321.nexcavate.structure.piece;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
