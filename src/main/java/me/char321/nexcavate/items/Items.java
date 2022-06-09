@@ -155,6 +155,7 @@ public class Items {
                         {mat(AIR), mat(AIR), mat(AIR)}
                 },
         }, new int[]{0, 0, 0}));
+        ITEM_HOLDER.setRecipeOutput(new CustomItemStack(ItemStacks.ITEM_HOLDER, 6));
         ITEM_HOLDER.register();
 
         ANCIENT_PART = new NEItem(ItemStacks.ANCIENT_PART, "NE_ANCIENT_PART");

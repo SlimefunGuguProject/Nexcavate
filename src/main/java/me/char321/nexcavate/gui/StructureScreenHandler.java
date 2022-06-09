@@ -1,10 +1,11 @@
-package me.char321.nexcavate.gui.structurescreen;
+package me.char321.nexcavate.gui;
 
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import me.char321.nexcavate.gui.NEGUI;
 import me.char321.nexcavate.gui.NEGUIInventoryHolder;
 import me.char321.nexcavate.structure.Structure;
 import me.char321.nexcavate.structure.piece.StructurePiece;
+import me.char321.nexcavate.util.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -17,6 +18,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
 
 public class StructureScreenHandler implements NEGUIInventoryHolder {
     private static final ItemStack BACKGROUND = new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE, " ");
@@ -24,6 +26,7 @@ public class StructureScreenHandler implements NEGUIInventoryHolder {
     private final Inventory inventory;
     private final int size;
     private Structure structure;
+    private ItemStack display;
     private int layer;
 
     public StructureScreenHandler(int size) {
@@ -48,15 +51,16 @@ public class StructureScreenHandler implements NEGUIInventoryHolder {
         return inventory;
     }
 
-    public void setStructure(Structure structure) {
+    public void setStructure(Structure structure, ItemStack display) {
         layer = 0;
         this.structure = structure;
+        this.display = display;
         refresh();
     }
 
     public void refresh() {
         inventory.setItem(0, new CustomItemStack(Material.ARROW, "&fBack"));
-        inventory.setItem(9, new CustomItemStack(Material.STRUCTURE_BLOCK, "&5Structure", "&7Place all the layers of the structure", "&7in the world as shown."));
+        inventory.setItem(9, display);
         for (int i = 18; i < size * 9; i += 9) {
             inventory.setItem(i, BACKGROUND);
         }
@@ -81,7 +85,7 @@ public class StructureScreenHandler implements NEGUIInventoryHolder {
 
         for (int z = 0; z < size; z++) {
             for (int x = 0; x < size; x++) {
-                inventory.setItem((z * 9) + (x + 7 - size), pieceLayer[z][x].getDisplay());
+                inventory.setItem((z * 9) + (x + 7 - size), getDisplay(pieceLayer[z][x]));
             }
         }
 
@@ -90,5 +94,19 @@ public class StructureScreenHandler implements NEGUIInventoryHolder {
                 inventory.setItem(y*9 + x, BACKGROUND);
             }
         }
+    }
+
+    private ItemStack getDisplay(StructurePiece structurePiece) {
+        ItemStack res = structurePiece.getDisplay();
+
+        if (!res.getType().isBlock()) {
+            ItemMeta im = res.getItemMeta();
+            ArrayList<String> lore = im.hasLore() ? new ArrayList<>(im.getLore()) : new ArrayList<>();
+            lore.add("");
+            lore.add(Utils.color("&fPlace an &eItem Holder &fat this place,"));
+            lore.add(Utils.color("&fthen put this item in it to assemble the structure."));
+        }
+
+        return res;
     }
 }

@@ -12,6 +12,8 @@ public class Researches {
 
     public static Research BASIC_ASSEMBLER;
 
+    public static Research ITEM_HOLDER;
+
     public static void init() {
         RESEARCH_TABLE = new Research(Nexcavate.key("RESEARCH_TABLE"), Items.RESEARCH_TABLE, ItemStacks.RESEARCH_TABLE, 0, 0, 0, 0);
         RESEARCH_TABLE.register();
@@ -23,5 +25,9 @@ public class Researches {
 
         BASIC_ASSEMBLER = new Research(Nexcavate.key("BASIC_ASSEMBLER"), Items.BASIC_ASSEMBLER, ItemStacks.BASIC_ASSEMBLER, 1, 2, 20, 1);
         BASIC_ASSEMBLER.register();
+
+        ITEM_HOLDER = new Research(Nexcavate.key("ITEM_HOLDER"), Items.ITEM_HOLDER, ItemStacks.ITEM_HOLDER, 1, 3, 5, 1);
+        ITEM_HOLDER.register();
+
     }
 }

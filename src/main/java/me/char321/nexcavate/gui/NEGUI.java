@@ -2,13 +2,17 @@ package me.char321.nexcavate.gui;
 
 import io.github.thebusybiscuit.slimefun4.api.player.PlayerProfile;
 import io.github.thebusybiscuit.slimefun4.core.guide.SlimefunGuide;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import me.char321.nexcavate.Nexcavate;
-import me.char321.nexcavate.gui.structurescreen.StructureScreenHandler;
+import me.char321.nexcavate.items.ItemStacks;
+import me.char321.nexcavate.slimefun.NEAssembly;
 import me.char321.nexcavate.slimefun.NEStructure;
 import me.char321.nexcavate.structure.Structure;
 import me.char321.nexcavate.research.Research;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,7 +39,7 @@ public class NEGUI {
         p.openInventory(handler.getInventory());
     }
 
-    public static void openStructure(Player p, Structure structure) {
+    public static void openStructure(Player p, Structure structure, ItemStack display) {
         NEScreens neScreens = inventories.computeIfAbsent(p.getUniqueId(), NEScreens::new);
         StructureScreenHandler handler;
         switch (structure.size) {
@@ -54,13 +58,15 @@ public class NEGUI {
             default:
                 throw new IllegalArgumentException("Tried to open structure with invalid size!");
         }
-        handler.setStructure(structure);
+        handler.setStructure(structure, display);
         p.openInventory(handler.getInventory());
     }
 
     public static void openRecipe(Player player, Research research) {
-        if (research.getItem() instanceof NEStructure) {
-            openStructure(player, ((NEStructure) research.getItem()).getStructure());
+        if (research.getItem() instanceof NEStructure neStructure) {
+            openStructure(player, neStructure.getStructure(), new CustomItemStack(Material.STRUCTURE_BLOCK, "&5Structure", "&7Place all the layers of the structure", "&7in the world as shown."));
+        } else if (research.getItem() instanceof NEAssembly neAssembly) {
+            openStructure(player, neAssembly.getStructure(), new CustomItemStack(ItemStacks.BASIC_ASSEMBLER, "&5Assembly", "&7Place all the layers of the assembly", "&7in an assembler and activate it", "&7to assemble this item."));
         } else {
             //fallback
             PlayerProfile.get(player, profile -> {

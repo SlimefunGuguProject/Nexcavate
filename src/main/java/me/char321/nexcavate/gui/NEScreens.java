@@ -1,7 +1,5 @@
 package me.char321.nexcavate.gui;
 
-import me.char321.nexcavate.gui.structurescreen.StructureScreenHandler;
-
 import java.util.UUID;
 
 public class NEScreens {

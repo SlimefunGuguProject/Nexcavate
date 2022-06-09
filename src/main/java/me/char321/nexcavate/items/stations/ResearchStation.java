@@ -53,43 +53,43 @@ public class ResearchStation extends NEStructure implements Listener {
             player.playSound(player, Sound.AMBIENT_SOUL_SAND_VALLEY_MOOD, 1, 1);
             player.playSound(player, Sound.AMBIENT_CRIMSON_FOREST_MOOD, 1, 1);
             player.playSound(player, Sound.AMBIENT_NETHER_WASTES_MOOD, 1, 1);
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&dAfter successfully constructing the &eResearch Table&d, you sense an immense energy radiating from the depths."));
+            player.sendMessage(Utils.color("&dAfter successfully constructing the &eResearch Table&d, you sense an immense energy radiating from the depths."));
         }, () -> {
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&dTo your surprise, an unfamiliar voice pierces the air."));
-        }, () -> {
-            player.playSound(player, Sound.ENTITY_ZOMBIFIED_PIGLIN_DEATH, 1, 0.5f);
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7&oWe've been trapped in here for so long..."));
-        }, () -> {
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&dYou grew confused. &f&oWhat? &r&dYou find yourself asking."));
+            player.sendMessage(Utils.color("&dTo your surprise, an unfamiliar voice pierces the air."));
         }, () -> {
             player.playSound(player, Sound.ENTITY_ZOMBIFIED_PIGLIN_DEATH, 1, 0.5f);
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7&oPlease, help us. We need you to rebuild our once great civilization."));
+            player.sendMessage(Utils.color("&7&oWe've been trapped in here for so long..."));
+        }, () -> {
+            player.sendMessage(Utils.color("&dYou grew confused. &f&oWhat? &r&dYou find yourself asking."));
         }, () -> {
             player.playSound(player, Sound.ENTITY_ZOMBIFIED_PIGLIN_DEATH, 1, 0.5f);
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7&oI'm sure you've come across some of our &eBastion Remnants."));
+            player.sendMessage(Utils.color("&7&oPlease, help us. We need you to rebuild our once great civilization."));
         }, () -> {
             player.playSound(player, Sound.ENTITY_ZOMBIFIED_PIGLIN_DEATH, 1, 0.5f);
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7&oThey were once homes of a highly advanced species."));
+            player.sendMessage(Utils.color("&7&oI'm sure you've come across some of our &eBastion Remnants."));
         }, () -> {
             player.playSound(player, Sound.ENTITY_ZOMBIFIED_PIGLIN_DEATH, 1, 0.5f);
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7&oAble to achieve things now incomprehensible."));
+            player.sendMessage(Utils.color("&7&oThey were once homes of a highly advanced species."));
         }, () -> {
             player.playSound(player, Sound.ENTITY_ZOMBIFIED_PIGLIN_DEATH, 1, 0.5f);
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7&oThey were left in ruins after The &kGreat Abcdefghi."));
+            player.sendMessage(Utils.color("&7&oAble to achieve things now inconceivable."));
         }, () -> {
             player.playSound(player, Sound.ENTITY_ZOMBIFIED_PIGLIN_DEATH, 1, 0.5f);
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7&oThe species, along with all of its progress, was wiped off the face of the Nether."));
+            player.sendMessage(Utils.color("&7&oThey were left in ruins after The &kGreat Abcdefghi."));
         }, () -> {
             player.playSound(player, Sound.ENTITY_ZOMBIFIED_PIGLIN_DEATH, 1, 0.5f);
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7&oSome traces were still present &ein the walls &7&oof the remaining structures, but it was unrecoverable for the species."));
+            player.sendMessage(Utils.color("&7&oThe species, along with all of its progress, was wiped off the face of the Nether."));
         }, () -> {
             player.playSound(player, Sound.ENTITY_ZOMBIFIED_PIGLIN_DEATH, 1, 0.5f);
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7&oThe only way they could ever relive the past was with a special tool, only craftable from materials found in the Overworld."));
+            player.sendMessage(Utils.color("&7&oSome traces were still present &ein the walls &7&oof the remaining structures, but it was unrecoverable for the species."));
         }, () -> {
             player.playSound(player, Sound.ENTITY_ZOMBIFIED_PIGLIN_DEATH, 1, 0.5f);
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7&oA &eRediscovery Pickaxe&7&o, which could extract &eancient parts &7&otrapped in blocks around Bastion Remnants."));
+            player.sendMessage(Utils.color("&7&oThe only way they could ever relive the past was with a special tool, only craftable from materials found in the Overworld."));
         }, () -> {
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&dBefore you could ask any questions, the voice had left."));
+            player.playSound(player, Sound.ENTITY_ZOMBIFIED_PIGLIN_DEATH, 1, 0.5f);
+            player.sendMessage(Utils.color("&7&oA &eRediscovery Pickaxe&7&o, which could extract &eancient parts &7&otrapped in blocks around Bastion Remnants."));
+        }, () -> {
+            player.sendMessage(Utils.color("&dBefore you could ask any questions, the voice had left."));
         }, () -> {
             NEGUI.openResearchScreen(player, tier);
         }

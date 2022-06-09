@@ -11,6 +11,9 @@ import org.bukkit.Material;
 public class Structure {
     private final StructurePiece[][][] structure;
     private final int[] center;
+    /**
+     * the sidelength of the cube
+     */
     public final int size;
 
     public Structure(StructurePiece[][][] structure, int[] center) {

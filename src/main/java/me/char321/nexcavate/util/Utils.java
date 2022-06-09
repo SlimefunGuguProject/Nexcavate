@@ -1,11 +1,25 @@
 package me.char321.nexcavate.util;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.config.Config;
 import me.char321.nexcavate.Nexcavate;
+import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
 
 public class Utils {
     public static void runWithDelay(long period, Runnable... runnables) {
@@ -34,4 +48,45 @@ public class Utils {
         throw new IllegalArgumentException();
     }
 
+    /**
+     * break a block and call the slimefun item handler if applicable by pretending it is exploded
+     * will also delete dropped items if asked to
+     *
+     * @param block block to remove
+     * @param removeItems if dropped items should be removed
+     */
+    public static void removeBlock(Block block, boolean removeItems) {
+        SlimefunItem sfItem = BlockStorage.check(block);
+
+        if (sfItem != null && !sfItem.useVanillaBlockBreaking()) {
+            sfItem.callItemHandler(BlockBreakHandler.class, handler -> handler.onExplode(block, new ArrayList<>()));
+            if (removeItems) {
+                block.getWorld().getNearbyEntities(block.getBoundingBox()).stream().filter(e -> e instanceof Item).forEach(Entity::remove);
+            }
+            BlockStorage.clearBlockInfo(block);
+        }
+
+        block.setType(Material.AIR);
+    }
+
+    public static String color(String s) {
+        return ChatColor.translateAlternateColorCodes('&', s);
+    }
+
+    /**
+     * appends strings to an item's lore
+     *
+     * @param strings the strings of lore to append
+     * @return the itemmeta of the item
+     */
+    public static ItemMeta appendLore(ItemStack item, String... strings) {
+        ItemMeta im = item.getItemMeta();
+        ArrayList<String> lore = im.hasLore() ? new ArrayList<>(im.getLore()) : new ArrayList<>();
+        for (String string : strings) {
+            lore.add(color(string));
+        }
+        im.setLore(lore);
+        item.setItemMeta(im);
+        return im;
+    }
 }

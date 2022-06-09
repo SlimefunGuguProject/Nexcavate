@@ -8,6 +8,7 @@ import me.char321.nexcavate.items.Items;
 import me.char321.nexcavate.research.Research;
 import me.char321.nexcavate.research.progress.PlayerProgress;
 import me.char321.nexcavate.research.progress.ProgressManager;
+import me.char321.nexcavate.util.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -15,6 +16,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -58,30 +60,21 @@ public class ResearchScreenHandler implements NEGUIInventoryHolder {
     }
 
     private ItemStack getDisplay(Research research) {
-        ItemStack res = research.getDisplay();
+        ItemStack res = research.getDisplay().clone();
         PlayerProgress playerProgress = PlayerProgress.get(player);
         if (research.equals(playerProgress.getCurrentResearch())) {
             PlayerProgress.ResearchProgress progress = playerProgress.getCurrentResearchProgress();
-            res = res.clone();
             res.setType(Material.YELLOW_STAINED_GLASS);
-            ItemMeta im = res.getItemMeta();
-            ArrayList<String> lore = im.hasLore() ? new ArrayList<>(im.getLore()) : new ArrayList<>();
-            lore.add("");
-            lore.add(ChatColor.translateAlternateColorCodes('&', "&7Research progress: &7" + progress.currentProgress()));
-            im.setLore(lore);
+            ItemMeta im = Utils.appendLore(res, "", "&7Research progress: &7" + progress.currentProgress());
+            im.getEnchants().forEach((enchantment, i) -> im.removeEnchant(enchantment));
             res.setItemMeta(im);
         } else if (!playerProgress.isResearched(research)) {
             if (research.getTier() > currentTier) {
-                res = new CustomItemStack(Material.BARRIER, "&4&lLocked", "&7A &f" + Nexcavate.instance().getRegistry().getResearchStation(research.getTier()).getItemName() + "&7 is required to research this item.");
+                res = new CustomItemStack(Material.BARRIER, "&4&lLocked", "&7A &f" + Nexcavate.instance().getRegistry().getResearchStation(research.getTier()).getItemName(), "&7 is required to research this item.");
             } else {
-                res = res.clone();
                 res.setType(Material.GRAY_STAINED_GLASS);
-                ItemMeta im = res.getItemMeta();
-                ArrayList<String> lore = im.hasLore() ? new ArrayList<>(im.getLore()) : new ArrayList<>();
-                lore.add("");
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Research cost: &f" + research.getCost() + " Ancient Parts"));
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Research time: &f" + research.getTime() + " minute(s)"));
-                im.setLore(lore);
+                ItemMeta im = Utils.appendLore(res, "", "&7Research cost: &f" + research.getCost() + " Ancient Parts", "&7Research time: &f" + research.getTime() + " minute(s)");
+                im.getEnchants().forEach((enchantment, i) -> im.removeEnchant(enchantment));
                 res.setItemMeta(im);
             }
         }
@@ -102,9 +95,9 @@ public class ResearchScreenHandler implements NEGUIInventoryHolder {
             NEGUI.openRecipe(player1, researchSlots.get(e.getRawSlot()));
         } else if (currentTier >= research.getTier()) {
             if (playerProgress.getCurrentResearchProgress() != null) {
-                e.getWhoClicked().sendMessage(ChatColor.translateAlternateColorCodes('&', "&cYou are already researching &f" + playerProgress.getCurrentResearch().getName() + "&c!"));
+                e.getWhoClicked().sendMessage(Utils.color("&cYou are already researching &f" + playerProgress.getCurrentResearch().getName() + "&c!"));
             } else if (!canAfford(player1, research)) {
-                e.getWhoClicked().sendMessage(ChatColor.translateAlternateColorCodes('&', "&cYou cannot afford this research! " + research.getCost() + " ancient parts are required."));
+                e.getWhoClicked().sendMessage(Utils.color("&cYou cannot afford this research! " + research.getCost() + " ancient parts are required."));
             } else {
                 consumeParts(player1, research);
                 playerProgress.beginResearch(research);

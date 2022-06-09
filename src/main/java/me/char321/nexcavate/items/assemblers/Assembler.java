@@ -4,20 +4,29 @@ import me.char321.nexcavate.Nexcavate;
 import me.char321.nexcavate.slimefun.NEAssembly;
 import me.char321.nexcavate.slimefun.NEStructure;
 import me.char321.nexcavate.structure.Structure;
+import me.char321.nexcavate.util.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.BoundingBox;
+import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class Assembler extends NEStructure implements Listener {
     public Assembler(ItemStack item, String id, Structure structure) {
@@ -42,7 +51,7 @@ public class Assembler extends NEStructure implements Listener {
         }
     }
 
-    public boolean tryAssemble(int orientation, Block center) {
+    public boolean tryAssemble(int assemblerOrientation, Block center) {
         Location centerPos = center.getLocation();
 
         /*
@@ -64,28 +73,26 @@ public class Assembler extends NEStructure implements Listener {
         //assemblies must have center 0,0,0
         Location absoluteOrigin;
         List<Location> origins = new ArrayList<>();
-        switch (orientation) { //TODO broken
+        switch (assemblerOrientation) {
             case 0 -> {
                 //to you
-                absoluteOrigin = centerPos.clone().subtract(structure.getCenter()[0], structure.getCenter()[1], structure.getCenter()[2]);
+                absoluteOrigin = centerPos.clone().subtract(structure.getCenter()[2], structure.getCenter()[0], structure.getCenter()[1]);
             }
             case 1 -> {
-                absoluteOrigin = centerPos.clone().subtract(structure.getCenter()[0], structure.getCenter()[1], structure.getCenter()[2]);
-                //basically rotate about the absolute center
+                absoluteOrigin = centerPos.clone().subtract(-structure.getCenter()[1], structure.getCenter()[0], structure.getCenter()[2]);
                 absoluteOrigin.subtract(structure.size-1, 0, 0);
             }
             case 2 -> {
-                absoluteOrigin = centerPos.clone().subtract(structure.getCenter()[0], structure.getCenter()[1], structure.getCenter()[2]);
-                //basically rotate about the absolute center
+                absoluteOrigin = centerPos.clone().subtract(-structure.getCenter()[2], structure.getCenter()[0], -structure.getCenter()[1]);
                 absoluteOrigin.subtract(structure.size-1, 0, structure.size-1);
             }
             case 3 -> {
-                absoluteOrigin = centerPos.clone().subtract(structure.getCenter()[0], structure.getCenter()[1], structure.getCenter()[2]);
-                //basically rotate about the absolute center
+                absoluteOrigin = centerPos.clone().subtract(structure.getCenter()[1], structure.getCenter()[0], -structure.getCenter()[2]);
                 absoluteOrigin.subtract(0, 0, structure.size-1);
             }
-            default -> throw new IllegalArgumentException("expected orientation 0-3, got " + orientation);
+            default -> throw new IllegalArgumentException("expected orientation 0-3, got " + assemblerOrientation);
         }
+
         //front left
         origins.add(absoluteOrigin.clone().add(1, 1, 1));
         //front right
@@ -102,10 +109,10 @@ public class Assembler extends NEStructure implements Listener {
                 continue;
             }
 
-            for(int i = 0; i < 4; i++) {
-                Location origin = origins.get(i);
-                if (recipe.validateOrientation(origin, i)) {
-                    assemble(entry.getValue(), origin);
+            for(int recipeOrientation = 0; recipeOrientation < 4; recipeOrientation++) {
+                Location origin = origins.get(recipeOrientation);
+                if (recipe.validateOrientation(origin, recipeOrientation)) {
+                    beginAssemble(entry.getValue(), origin, box(origin, recipeOrientation, recipe.size));
                     return true;
                 }
             }
@@ -113,7 +120,86 @@ public class Assembler extends NEStructure implements Listener {
         return false;
     }
 
-    private void assemble(NEAssembly assembly, Location destination) {
-        info("wowwee you assembnled a " + assembly.getItemName());
+    private BoundingBox box(Location origin, int orientation, int size) {
+        switch (orientation) {
+            case 0 -> {
+                return BoundingBox.of(origin, origin.clone().add(size-1, size-1, size-1));
+            }
+            case 1 -> {
+                return BoundingBox.of(origin, origin.clone().add(-(size-1), size-1, size-1));
+            }
+            case 2 -> {
+                return BoundingBox.of(origin, origin.clone().add(-(size-1), size-1, -size-1));
+            }
+            case 3 -> {
+                return BoundingBox.of(origin, origin.clone().add(size-1, size-1, -(size-1)));
+            }
+        }
+        return null;
+    }
+
+    private void beginAssemble(NEAssembly assembly, Location destination, BoundingBox ingredients) {
+        for (Entity entity : destination.getWorld().getNearbyEntities(destination, 25, 25, 25)) {
+            if (entity instanceof Player) {
+                playAnimation(destination, ingredients);
+                break;
+            }
+        }
+        assemble(assembly, destination, ingredients);
+    }
+
+    private void playAnimation(Location destination, BoundingBox ingredients) {
+        Set<Block> blocks = new HashSet<>();
+        for (double y = ingredients.getMinY(); y <= ingredients.getMaxY(); y++) {
+            for (double z = ingredients.getMinZ(); z <= ingredients.getMaxZ(); z++) {
+                for (double x = ingredients.getMinX(); x <= ingredients.getMaxX(); x++) {
+                    blocks.add(new Location(destination.getWorld(), x, y, z).getBlock());
+                }
+            }
+        }
+
+        List<FallingBlock> fallingBlocks = new ArrayList<>();
+        for (Block b : blocks) {
+            if (b.getType().equals(Material.AIR)) {
+                continue;
+            }
+            FallingBlock block = b.getWorld().spawnFallingBlock(b.getLocation().add(0.5, 0, 0.5), b.getBlockData());
+            block.setVelocity(new Vector(0, 0, 0));
+            block.setGravity(false);
+            block.setDropItem(false);
+            block.setPersistent(true);
+            block.setInvulnerable(true);
+            fallingBlocks.add(block);
+        }
+
+        Vector center = ingredients.getCenter().add(new Vector(0.5, 0, 0.5));
+
+        for (FallingBlock fallingBlock : fallingBlocks) {
+            Location location = fallingBlock.getLocation();
+            Vector v = new Vector(center.getX() - location.getX(), center.getY()-location.getY(), center.getZ()-location.getZ());
+            v.normalize().multiply(0.03);
+            fallingBlock.setVelocity(v);
+        }
+
+        Bukkit.getScheduler().runTaskLater(Nexcavate.instance(), () -> {
+            fallingBlocks.forEach(Entity::remove);
+            destination.getWorld().spawnParticle(Particle.SOUL_FIRE_FLAME, center.getX(), center.getY(), center.getZ(), 100, 0, 0, 0, 0.5);
+        }, 50L);
+    }
+
+    private void assemble(NEAssembly assembly, Location destination, BoundingBox ingredients) {
+        for (double y = ingredients.getMinY(); y <= ingredients.getMaxY(); y++) {
+            for (double z = ingredients.getMinZ(); z <= ingredients.getMaxZ(); z++) {
+                for (double x = ingredients.getMinX(); x <= ingredients.getMaxX(); x++) {
+                    Block block = new Location(destination.getWorld(), x, y, z).getBlock();
+                    block.setType(Material.AIR);
+                    Utils.removeBlock(block, true);
+                }
+            }
+        }
+
+        Bukkit.getScheduler().runTaskLater(Nexcavate.instance(), () -> {
+            destination.getWorld().dropItem(ingredients.getCenter().toLocation(destination.getWorld()).add(0.5, 0, 0.5), assembly.getRecipeOutput().clone());
+        }, 50L);
     }
 }
