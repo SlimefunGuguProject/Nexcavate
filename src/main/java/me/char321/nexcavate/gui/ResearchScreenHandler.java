@@ -70,7 +70,7 @@ public class ResearchScreenHandler implements NEGUIInventoryHolder {
             res.setItemMeta(im);
         } else if (!playerProgress.isResearched(research)) {
             if (research.getTier() > currentTier) {
-                res = new CustomItemStack(Material.BARRIER, "&4&lLocked", "&7A &f" + Nexcavate.instance().getRegistry().getResearchStation(research.getTier()).getItemName(), "&7 is required to research this item.");
+                res = new CustomItemStack(Material.BARRIER, "&4&lLocked", "&7A &f" + Nexcavate.instance().getRegistry().getResearchStation(research.getTier()).getItemName(), "&7is required to research this item.");
             } else {
                 res.setType(Material.GRAY_STAINED_GLASS_PANE);
                 ItemMeta im = Utils.appendLore(res, "", "&7Research cost: &f" + research.getCost() + " Ancient Parts", "&7Research time: &f" + research.getTime() + " minute(s)");

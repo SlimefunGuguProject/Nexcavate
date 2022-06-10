@@ -13,6 +13,7 @@ public class Researches {
     public static Research BASIC_ASSEMBLER;
 
     public static Research BLACKSTONE_CAST;
+    public static Research PART_EXTRACTOR;
 
     public static Research ITEM_HOLDER;
 
@@ -30,6 +31,8 @@ public class Researches {
 
         BLACKSTONE_CAST = new Research(Nexcavate.key("BLACKSTONE_CAST"), Items.BLACKSTONE_CAST, ItemStacks.BLACKSTONE_CAST, 1, 3, 15, 1);
         BLACKSTONE_CAST.register();
+        PART_EXTRACTOR = new Research(Nexcavate.key("PART_EXTRACTOR"), Items.PART_EXTRACTOR, ItemStacks.PART_EXTRACTOR, 1, 3, 15, 1);
+        PART_EXTRACTOR.register();
 
         ITEM_HOLDER = new Research(Nexcavate.key("ITEM_HOLDER"), Items.ITEM_HOLDER, ItemStacks.ITEM_HOLDER, 1, 5, 5, 1);
         ITEM_HOLDER.register();

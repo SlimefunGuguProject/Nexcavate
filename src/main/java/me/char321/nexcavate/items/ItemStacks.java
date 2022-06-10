@@ -21,6 +21,8 @@ public class ItemStacks {
     });
 
     public static final ItemStack BLACKSTONE_CAST = new SlimefunItemStack("NE_BLACKSTONE_CAST", Material.CAULDRON, "&eBlackstone Cast", "&7Automatically extracts lava and infinitely casts it", "&7into blackstone when given power. Must be placed", "&7above a lava source in the Nether.", "", LoreBuilder.powerPerSecond(24));
+    public static final ItemStack PART_EXTRACTOR = new SlimefunItemStack("NE_PART_EXTRACTOR", Material.RED_NETHER_BRICKS, "&ePart Extractor", "&7Slowly extracts ancient parts from blackstone", "&7when powered.", "&7Must be placed in the Nether.", "", LoreBuilder.powerPerSecond(12));
+
 
     public static final ItemStack ITEM_HOLDER = new SlimefunItemStack("NE_ITEM_HOLDER", Material.CYAN_STAINED_GLASS, "&fItem Holder", "&7Holds an item.", "&7Used for using items as ingredients in assemblers.");
 

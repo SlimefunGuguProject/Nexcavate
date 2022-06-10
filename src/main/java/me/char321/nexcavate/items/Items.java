@@ -7,6 +7,7 @@ import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import me.char321.nexcavate.Nexcavate;
 import me.char321.nexcavate.items.assemblers.Assembler;
 import me.char321.nexcavate.items.machines.BlackstoneCast;
+import me.char321.nexcavate.items.machines.PartExtractor;
 import me.char321.nexcavate.items.misc.ItemHolder;
 import me.char321.nexcavate.items.stations.ResearchStation;
 import me.char321.nexcavate.slimefun.NEAssembly;
@@ -48,6 +49,7 @@ public class Items {
     public static Assembler BASIC_ASSEMBLER;
 
     public static BlackstoneCast BLACKSTONE_CAST;
+    public static PartExtractor PART_EXTRACTOR;
 
     public static NEAssembly ITEM_HOLDER;
 
@@ -165,6 +167,24 @@ public class Items {
                 }
         }, new int[]{0, 0, 0}), 12, 12);
         BLACKSTONE_CAST.register();
+
+        PART_EXTRACTOR = new PartExtractor(ItemStacks.PART_EXTRACTOR, "NE_PART_EXTRACTOR", new Structure(new StructurePiece[][][]{
+                {
+                        {mat(NETHER_BRICKS), mat(NETHER_BRICKS), mat(NETHER_BRICKS)},
+                        {mat(NETHER_BRICKS), mat(RED_NETHER_BRICKS), mat(NETHER_BRICKS)},
+                        {mat(NETHER_BRICKS), mat(NETHER_BRICKS), mat(NETHER_BRICKS)}
+                }, {
+                        {mat(RED_NETHER_BRICKS), ancientPart, mat(RED_NETHER_BRICKS)},
+                        {ancientPart, ancientPart, ancientPart},
+                        {mat(RED_NETHER_BRICKS), ancientPart, mat(RED_NETHER_BRICKS)}
+                },
+                {
+                        {mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS)},
+                        {mat(POLISHED_BLACKSTONE_BRICKS), mat(RED_NETHER_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS)},
+                        {mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS)}
+                }
+        }, new int[]{0, 0, 0}), 12, 6, 3);
+        PART_EXTRACTOR.register();
 
         ITEM_HOLDER = new ItemHolder(ItemStacks.ITEM_HOLDER, "NE_ITEM_HOLDER", new Structure(new StructurePiece[][][]{
                 {
