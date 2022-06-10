@@ -64,7 +64,7 @@ public class ResearchScreenHandler implements NEGUIInventoryHolder {
         PlayerProgress playerProgress = PlayerProgress.get(player);
         if (research.equals(playerProgress.getCurrentResearch())) {
             PlayerProgress.ResearchProgress progress = playerProgress.getCurrentResearchProgress();
-            res.setType(Material.YELLOW_STAINED_GLASS);
+            res.setType(Material.YELLOW_STAINED_GLASS_PANE);
             ItemMeta im = Utils.appendLore(res, "", "&7Research progress: &7" + progress.currentProgress());
             im.getEnchants().forEach((enchantment, i) -> im.removeEnchant(enchantment));
             res.setItemMeta(im);
@@ -72,7 +72,7 @@ public class ResearchScreenHandler implements NEGUIInventoryHolder {
             if (research.getTier() > currentTier) {
                 res = new CustomItemStack(Material.BARRIER, "&4&lLocked", "&7A &f" + Nexcavate.instance().getRegistry().getResearchStation(research.getTier()).getItemName(), "&7 is required to research this item.");
             } else {
-                res.setType(Material.GRAY_STAINED_GLASS);
+                res.setType(Material.GRAY_STAINED_GLASS_PANE);
                 ItemMeta im = Utils.appendLore(res, "", "&7Research cost: &f" + research.getCost() + " Ancient Parts", "&7Research time: &f" + research.getTime() + " minute(s)");
                 im.getEnchants().forEach((enchantment, i) -> im.removeEnchant(enchantment));
                 res.setItemMeta(im);

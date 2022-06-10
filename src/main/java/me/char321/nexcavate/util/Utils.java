@@ -9,11 +9,13 @@ import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.util.BoundingBox;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -61,7 +63,9 @@ public class Utils {
         if (sfItem != null && !sfItem.useVanillaBlockBreaking()) {
             sfItem.callItemHandler(BlockBreakHandler.class, handler -> handler.onExplode(block, new ArrayList<>()));
             if (removeItems) {
-                block.getWorld().getNearbyEntities(block.getBoundingBox()).stream().filter(e -> e instanceof Item).forEach(Entity::remove);
+                BoundingBox bbox = block.getBoundingBox();
+                World world = block.getWorld();
+                Bukkit.getScheduler().runTaskLater(Nexcavate.instance(), () -> world.getNearbyEntities(bbox).stream().filter(e -> e instanceof Item).forEach(Entity::remove), 1L);
             }
             BlockStorage.clearBlockInfo(block);
         }

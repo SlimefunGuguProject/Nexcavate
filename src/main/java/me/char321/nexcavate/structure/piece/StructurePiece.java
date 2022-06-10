@@ -20,4 +20,8 @@ public interface StructurePiece {
     static StructurePiece u(ItemStack display, StructurePiece... pieces) {
         return new UnionStructurePiece(display, pieces);
     }
+
+    static StructurePiece wrap(ItemStack item) {
+        return new ItemHolderStructurePiece(item);
+    }
 }

@@ -6,6 +6,8 @@ import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import me.char321.nexcavate.Nexcavate;
 import me.char321.nexcavate.items.assemblers.Assembler;
+import me.char321.nexcavate.items.machines.BlackstoneCast;
+import me.char321.nexcavate.items.misc.ItemHolder;
 import me.char321.nexcavate.items.stations.ResearchStation;
 import me.char321.nexcavate.slimefun.NEAssembly;
 import me.char321.nexcavate.slimefun.NEItem;
@@ -14,6 +16,7 @@ import me.char321.nexcavate.structure.piece.AnyStructurePiece;
 import me.char321.nexcavate.structure.piece.StructurePiece;
 import me.char321.nexcavate.items.tools.RediscoveryPickaxe;
 import me.char321.nexcavate.items.tools.loot.LootTables;
+import me.char321.nexcavate.util.Utils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -22,6 +25,7 @@ import javax.annotation.Nonnull;
 
 import static me.char321.nexcavate.structure.piece.StructurePiece.mat;
 import static me.char321.nexcavate.structure.piece.StructurePiece.u;
+import static me.char321.nexcavate.structure.piece.StructurePiece.wrap;
 import static org.bukkit.Material.*;
 
 public class Items {
@@ -42,6 +46,8 @@ public class Items {
     public static RediscoveryPickaxe REDISCOVERY_PICKAXE;
 
     public static Assembler BASIC_ASSEMBLER;
+
+    public static BlackstoneCast BLACKSTONE_CAST;
 
     public static NEAssembly ITEM_HOLDER;
 
@@ -140,7 +146,27 @@ public class Items {
         }, new int[]{0, 4, 2}));
         BASIC_ASSEMBLER.register();
 
-        ITEM_HOLDER = new NEAssembly(ItemStacks.ITEM_HOLDER, "NE_ITEM_HOLDER", new Structure(new StructurePiece[][][]{
+        StructurePiece ancientPart = wrap(ItemStacks.ANCIENT_PART);
+        BLACKSTONE_CAST = new BlackstoneCast(ItemStacks.BLACKSTONE_CAST, "NE_BLACKSTONE_CAST", new Structure(new StructurePiece[][][]{
+                {
+                        {ancientPart, mat(AIR), ancientPart},
+                        {mat(AIR), mat(AIR), mat(AIR)},
+                        {ancientPart, mat(AIR), ancientPart}
+                },
+                {
+                        {mat(IRON_BLOCK), mat(IRON_BLOCK), mat(IRON_BLOCK)},
+                        {mat(IRON_BLOCK), mat(CAULDRON), mat(IRON_BLOCK)},
+                        {mat(IRON_BLOCK), mat(IRON_BLOCK), mat(IRON_BLOCK)}
+                },
+                {
+                        {mat(IRON_BLOCK), mat(IRON_BLOCK), mat(IRON_BLOCK)},
+                        {mat(IRON_BLOCK), mat(AIR), mat(IRON_BLOCK)},
+                        {mat(IRON_BLOCK), mat(IRON_BLOCK), mat(IRON_BLOCK)}
+                }
+        }, new int[]{0, 0, 0}), 12, 12);
+        BLACKSTONE_CAST.register();
+
+        ITEM_HOLDER = new ItemHolder(ItemStacks.ITEM_HOLDER, "NE_ITEM_HOLDER", new Structure(new StructurePiece[][][]{
                 {
                         {mat(AIR), mat(AIR), mat(AIR)},
                         {mat(AIR), mat(CYAN_STAINED_GLASS), mat(AIR)},

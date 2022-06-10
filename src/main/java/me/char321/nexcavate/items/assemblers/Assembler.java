@@ -74,10 +74,7 @@ public class Assembler extends NEStructure implements Listener {
         Location absoluteOrigin;
         List<Location> origins = new ArrayList<>();
         switch (assemblerOrientation) {
-            case 0 -> {
-                //to you
-                absoluteOrigin = centerPos.clone().subtract(structure.getCenter()[2], structure.getCenter()[0], structure.getCenter()[1]);
-            }
+            case 0 -> absoluteOrigin = centerPos.clone().subtract(structure.getCenter()[2], structure.getCenter()[0], structure.getCenter()[1]);
             case 1 -> {
                 absoluteOrigin = centerPos.clone().subtract(-structure.getCenter()[1], structure.getCenter()[0], structure.getCenter()[2]);
                 absoluteOrigin.subtract(structure.size-1, 0, 0);
@@ -177,7 +174,9 @@ public class Assembler extends NEStructure implements Listener {
         for (FallingBlock fallingBlock : fallingBlocks) {
             Location location = fallingBlock.getLocation();
             Vector v = new Vector(center.getX() - location.getX(), center.getY()-location.getY(), center.getZ()-location.getZ());
-            v.normalize().multiply(0.03);
+            if (v.lengthSquared() != 0) {
+                v.multiply(0.035);
+            }
             fallingBlock.setVelocity(v);
         }
 
@@ -192,7 +191,6 @@ public class Assembler extends NEStructure implements Listener {
             for (double z = ingredients.getMinZ(); z <= ingredients.getMaxZ(); z++) {
                 for (double x = ingredients.getMinX(); x <= ingredients.getMaxX(); x++) {
                     Block block = new Location(destination.getWorld(), x, y, z).getBlock();
-                    block.setType(Material.AIR);
                     Utils.removeBlock(block, true);
                 }
             }

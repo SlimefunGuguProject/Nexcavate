@@ -5,19 +5,19 @@ import me.char321.nexcavate.structure.Structure;
 import org.bukkit.inventory.ItemStack;
 
 public class NEAssembly extends NEItem {
-    protected final Structure structure;
+    protected final Structure assembly;
 
-    public NEAssembly(ItemStack item, String id, Structure structure) {
+    public NEAssembly(ItemStack item, String id, Structure assembly) {
         super(item, id);
-        this.structure = structure;
+        this.assembly = assembly;
     }
 
     public Structure getStructure() {
-        return structure;
+        return assembly;
     }
 
     @Override
     public void postRegister() {
-        Nexcavate.instance().getRegistry().getAssemblies().put(structure, this);
+        Nexcavate.instance().getRegistry().getAssemblies().put(assembly, this);
     }
 }

@@ -3,6 +3,7 @@ package me.char321.nexcavate;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import me.char321.nexcavate.gui.NEGUI;
 import me.char321.nexcavate.items.Items;
+import me.char321.nexcavate.listener.Listeners;
 import me.char321.nexcavate.research.Researches;
 import me.char321.nexcavate.research.progress.AutoSaveTask;
 import me.char321.nexcavate.research.progress.ProgressManager;
@@ -34,6 +35,7 @@ public final class Nexcavate extends JavaPlugin implements SlimefunAddon {
         registry = new NexcavateRegistry();
         progressManager = new ProgressManager();
 
+        Listeners.init();
         NEGUI.init();
         Items.init();
         Researches.init();

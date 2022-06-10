@@ -12,6 +12,8 @@ public class Researches {
 
     public static Research BASIC_ASSEMBLER;
 
+    public static Research BLACKSTONE_CAST;
+
     public static Research ITEM_HOLDER;
 
     public static void init() {
@@ -26,7 +28,10 @@ public class Researches {
         BASIC_ASSEMBLER = new Research(Nexcavate.key("BASIC_ASSEMBLER"), Items.BASIC_ASSEMBLER, ItemStacks.BASIC_ASSEMBLER, 1, 2, 20, 1);
         BASIC_ASSEMBLER.register();
 
-        ITEM_HOLDER = new Research(Nexcavate.key("ITEM_HOLDER"), Items.ITEM_HOLDER, ItemStacks.ITEM_HOLDER, 1, 3, 5, 1);
+        BLACKSTONE_CAST = new Research(Nexcavate.key("BLACKSTONE_CAST"), Items.BLACKSTONE_CAST, ItemStacks.BLACKSTONE_CAST, 1, 3, 15, 1);
+        BLACKSTONE_CAST.register();
+
+        ITEM_HOLDER = new Research(Nexcavate.key("ITEM_HOLDER"), Items.ITEM_HOLDER, ItemStacks.ITEM_HOLDER, 1, 5, 5, 1);
         ITEM_HOLDER.register();
 
     }
