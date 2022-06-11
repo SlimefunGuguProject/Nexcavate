@@ -55,7 +55,7 @@ public class ResearchStation extends NEStructure implements Listener {
             player.playSound(player, Sound.AMBIENT_NETHER_WASTES_MOOD, 1, 1);
             player.sendMessage(Utils.color("&dAfter successfully constructing the &eResearch Table&d, you sense an immense energy radiating from the depths."));
         }, () -> {
-            player.sendMessage(Utils.color("&dTo your surprise, an unfamiliar voice pierces the air."));
+            player.sendMessage(Utils.color("&dTo your surprise, a mysterious voice pierces the air."));
         }, () -> {
             player.playSound(player, Sound.ENTITY_ZOMBIFIED_PIGLIN_DEATH, 1, 0.5f);
             player.sendMessage(Utils.color("&7&oWe've been trapped in here for so long..."));
@@ -84,7 +84,7 @@ public class ResearchStation extends NEStructure implements Listener {
             player.sendMessage(Utils.color("&7&oSome traces were still present &ein the walls &7&oof the remaining structures, but it was unrecoverable for the species."));
         }, () -> {
             player.playSound(player, Sound.ENTITY_ZOMBIFIED_PIGLIN_DEATH, 1, 0.5f);
-            player.sendMessage(Utils.color("&7&oThe only way they could ever relive the past was with a special tool, only craftable from materials found in the Overworld."));
+            player.sendMessage(Utils.color("&7&oThe only way the species could relive its greatness was with a special tool, only craftable from materials that were inaccessible to them"));
         }, () -> {
             player.playSound(player, Sound.ENTITY_ZOMBIFIED_PIGLIN_DEATH, 1, 0.5f);
             player.sendMessage(Utils.color("&7&oA &eRediscovery Pickaxe&7&o, which could extract &eancient parts &7&otrapped in blocks around Bastion Remnants."));

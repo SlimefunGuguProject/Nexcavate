@@ -10,6 +10,7 @@ import com.google.gson.stream.JsonReader;
 import me.char321.nexcavate.Nexcavate;
 import me.char321.nexcavate.research.Research;
 import me.char321.nexcavate.research.Researches;
+import me.char321.nexcavate.util.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
@@ -129,6 +130,15 @@ public class PlayerProgress {
         if (currentResearchProgress != null) {
             researches.add(currentResearchProgress.research.getKey());
             currentResearchProgress = null;
+
+            notifyPlayer();
+        }
+    }
+
+    private void notifyPlayer() {
+        Player p = Bukkit.getPlayer(this.player);
+        if (p != null) {
+            p.sendMessage(Utils.color("&aYour current research has completed! Open the Slimefun guide or a research station to view the recipe."));
         }
     }
 
