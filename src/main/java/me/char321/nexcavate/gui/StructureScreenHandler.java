@@ -1,8 +1,6 @@
 package me.char321.nexcavate.gui;
 
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
-import me.char321.nexcavate.gui.NEGUI;
-import me.char321.nexcavate.gui.NEGUIInventoryHolder;
 import me.char321.nexcavate.structure.Structure;
 import me.char321.nexcavate.structure.piece.StructurePiece;
 import me.char321.nexcavate.util.Utils;

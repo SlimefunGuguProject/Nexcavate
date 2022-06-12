@@ -1,6 +1,5 @@
 package me.char321.nexcavate.structure.piece;
 
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;

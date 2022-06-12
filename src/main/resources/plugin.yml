@@ -5,3 +5,7 @@ api-version: 1.16
 depend: [ Slimefun ]
 authors: [ char321 ]
 description: A Slimefun Addon about rebuilding the ancient civilization.
+
+commands:
+  nexcavate:
+    aliases: [nex]

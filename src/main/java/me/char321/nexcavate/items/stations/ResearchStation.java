@@ -2,12 +2,11 @@ package me.char321.nexcavate.items.stations;
 
 import me.char321.nexcavate.Nexcavate;
 import me.char321.nexcavate.gui.NEGUI;
+import me.char321.nexcavate.research.progress.PlayerProgress;
 import me.char321.nexcavate.slimefun.NEStructure;
 import me.char321.nexcavate.structure.Structure;
-import me.char321.nexcavate.research.progress.PlayerProgress;
 import me.char321.nexcavate.util.Utils;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

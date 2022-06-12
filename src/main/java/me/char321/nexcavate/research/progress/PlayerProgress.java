@@ -2,11 +2,7 @@ package me.char321.nexcavate.research.progress;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
 import me.char321.nexcavate.Nexcavate;
 import me.char321.nexcavate.research.Research;
 import me.char321.nexcavate.research.Researches;
@@ -18,17 +14,11 @@ import org.bukkit.entity.Player;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 public class PlayerProgress {
@@ -74,11 +64,13 @@ public class PlayerProgress {
     }
 
     public void research(Research research) {
-        researches.add(research.getKey());
+        research(research.getKey());
     }
 
     public void research(NamespacedKey research) {
-        researches.add(research);
+        if (!researches.contains(research)) {
+            researches.add(research);
+        }
     }
 
     public void setCompletedTutorial(boolean completedTutorial) {

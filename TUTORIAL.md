@@ -2,10 +2,7 @@
 
 ## Getting Started
 
-In the Slimefun guide, there will be a category called "Nexcavate".
-
-![](https://raw.githubusercontent.com/qwertyuioplkjhgfd/Nexcavate/main/img/tutorial_1.png)
-
+In the Slimefun guide, there will be a category called "Nexcavate".<br>
 When you open it, you will see that most items are locked, with the exception of the Research Table.
 
 ![](https://raw.githubusercontent.com/qwertyuioplkjhgfd/Nexcavate/main/img/tutorial_2.png)
@@ -21,6 +18,8 @@ Unlike a MultiBlock, this layer is horizontal rather than vertical.
 Once you gather the materials and build it according to the recipe, it should look something like this:
 
 ![](https://raw.githubusercontent.com/qwertyuioplkjhgfd/Nexcavate/main/img/tutorial_4.png)
+
+(You can use `/nexcavate validate` to see what blocks are incorrect. Read about how to use this command in README.md)
 
 Interacting with the research table will begin a cutscene that explains some lore.
 

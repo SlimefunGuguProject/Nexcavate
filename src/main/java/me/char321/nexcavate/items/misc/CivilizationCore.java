@@ -1,8 +1,6 @@
 package me.char321.nexcavate.items.misc;
 
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockPlaceHandler;
-import io.github.thebusybiscuit.slimefun4.implementation.handlers.SimpleBlockBreakHandler;
-import me.char321.nexcavate.gui.NEGUI;
 import me.char321.nexcavate.slimefun.NEAssembly;
 import me.char321.nexcavate.structure.Structure;
 import me.char321.nexcavate.util.Utils;

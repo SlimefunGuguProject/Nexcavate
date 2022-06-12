@@ -83,14 +83,31 @@ public class Structure {
 
     public boolean validateOrientation(Location center, int orientation) {
         for (int layer = 0; layer < structure.length; layer++) {
-            if (!validateLayer(center, layer, orientation)) {
+            if (validateLayer(center, layer, orientation) != null) {
                 return false;
             }
         }
         return true;
     }
 
-    private boolean validateLayer(Location centerPos, int layerIndex, int orientation) {
+    public String getIncorrect(Location center, int orientation) {
+        for (int layer = 0; layer < structure.length; layer++) {
+            Location location = validateLayer(center, layer, orientation);
+            if (location != null) {
+                return location.toVector().toString();
+            }
+        }
+        return null;
+    }
+
+    /**
+     *
+     * @param centerPos centerpiece location
+     * @param layerIndex which layer to check
+     * @param orientation the orientation to check
+     * @return null if succeeded, otherwise the location of the incorrect block
+     */
+    private Location validateLayer(Location centerPos, int layerIndex, int orientation) {
         StructurePiece[][] layer = structure[layerIndex];
         for (int z = 0; z < layer.length; z++) {
             for (int x = 0; x < layer[z].length; x++) {
@@ -118,11 +135,11 @@ public class Structure {
                 }
                 Location location = centerPos.clone().add(dx, dy, dz);
                 if (!layer[z][x].isValid(location.getBlock())) {
-                    return false;
+                    return location;
                 }
             }
         }
-        return true;
+        return null;
     }
 
     /**
