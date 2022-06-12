@@ -1,8 +1,5 @@
 # Nexcavate Tutorial
 
-**Warning:** This plugin is meant to be experienced as a story.<br>
-The following tutorial may contain spoilers and detract from the playing experience.
-
 ## Getting Started
 
 In the Slimefun guide, there will be a category called "Nexcavate".

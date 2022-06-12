@@ -101,7 +101,7 @@ public class ResearchScreenHandler implements NEGUIInventoryHolder {
             } else {
                 consumeParts(player1, research);
                 playerProgress.beginResearch(research);
-                player1.playSound(player1, Sound.BLOCK_END_PORTAL_SPAWN, 1, 1);
+                player1.playSound(player1, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
             }
             refresh();
         }

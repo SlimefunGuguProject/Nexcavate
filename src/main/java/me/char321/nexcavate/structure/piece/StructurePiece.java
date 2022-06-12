@@ -1,10 +1,13 @@
 package me.char321.nexcavate.structure.piece;
 
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.Map;
 
 public interface StructurePiece {
     boolean isValid(Block b);
@@ -23,5 +26,10 @@ public interface StructurePiece {
 
     static StructurePiece wrap(ItemStack item) {
         return new ItemHolderStructurePiece(item);
+    }
+
+    Map<String, StructurePiece> sfpieces = new HashMap<>();
+    static StructurePiece sf(String item) {
+        return sfpieces.computeIfAbsent(item, SlimefunItemStructurePiece::new);
     }
 }

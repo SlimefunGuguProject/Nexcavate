@@ -39,7 +39,7 @@ public class PlayerProgress {
 
     private transient UUID player;
     @SerializedName("completed_tutorial")
-    private boolean completedTutorial; //TODO tutorial
+    private boolean completedTutorial;
     private List<NamespacedKey> researches = new ArrayList<>();
     private ResearchProgress currentResearchProgress;
 

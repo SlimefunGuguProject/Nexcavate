@@ -10,6 +10,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.FallingBlock;
@@ -18,6 +19,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
@@ -29,14 +31,20 @@ import java.util.Map;
 import java.util.Set;
 
 public class Assembler extends NEStructure implements Listener {
+    private boolean netherRequired;
+
     public Assembler(ItemStack item, String id, Structure structure) {
         super(item, id, structure);
         Bukkit.getPluginManager().registerEvents(this, Nexcavate.instance());
     }
 
+    public void setNetherRequired(boolean netherRequired) {
+        this.netherRequired = netherRequired;
+    }
+
     @EventHandler
     public void interactListener(PlayerInteractEvent e) {
-        if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) && e.getClickedBlock() != null && structure.getCenterPiece().isValid(e.getClickedBlock())) {
+        if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) && e.getHand() != EquipmentSlot.OFF_HAND && e.getClickedBlock() != null && structure.getCenterPiece().isValid(e.getClickedBlock())) {
             int orientation = structure.orientation(e.getClickedBlock().getLocation());
             if (orientation != -1) {
                 e.setCancelled(true);
@@ -46,6 +54,11 @@ public class Assembler extends NEStructure implements Listener {
     }
 
     private void handleClick(Player player, int orientation, Block center) {
+        if (netherRequired && !player.getWorld().getEnvironment().equals(World.Environment.NETHER)) {
+            player.sendMessage(ChatColor.RED + "This machine doesn't seem to work here. Try the nether.");
+            return;
+        }
+
         if (!tryAssemble(orientation, center)) {
             player.sendMessage(ChatColor.RED + "The recipe in the assembler could not be recognized.");
         }
@@ -126,7 +139,7 @@ public class Assembler extends NEStructure implements Listener {
                 return BoundingBox.of(origin, origin.clone().add(-(size-1), size-1, size-1));
             }
             case 2 -> {
-                return BoundingBox.of(origin, origin.clone().add(-(size-1), size-1, -size-1));
+                return BoundingBox.of(origin, origin.clone().add(-(size-1), size-1, -(size-1)));
             }
             case 3 -> {
                 return BoundingBox.of(origin, origin.clone().add(size-1, size-1, -(size-1)));

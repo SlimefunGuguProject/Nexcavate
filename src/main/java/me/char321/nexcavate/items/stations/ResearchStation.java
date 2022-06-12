@@ -30,7 +30,6 @@ public class ResearchStation extends NEStructure implements Listener {
         if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) && e.getClickedBlock() != null && structure.getCenterPiece().isValid(e.getClickedBlock())) {
             if (structure.validate(e.getClickedBlock().getLocation())) {
                 e.setCancelled(true);
-                info("orientation " + structure.orientation(e.getClickedBlock().getLocation()));
                 handleClick(e.getPlayer());
             }
         }

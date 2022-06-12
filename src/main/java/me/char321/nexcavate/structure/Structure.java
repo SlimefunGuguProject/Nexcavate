@@ -22,6 +22,10 @@ public class Structure {
         this.size = structure.length;
     }
 
+    public Structure(StructurePiece[][][] structure) {
+        this(structure, new int[]{0, 0, 0});
+    }
+
     public StructurePiece[][][] getPieces() {
         return structure;
     }

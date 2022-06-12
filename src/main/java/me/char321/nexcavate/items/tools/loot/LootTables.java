@@ -26,4 +26,25 @@ public class LootTables {
         chances.put(Material.NETHER_BRICK_FENCE, 0.1f);
         REDISCOVERY_PICKAXE = new ProbabilityLootTable(ItemStacks.ANCIENT_PART, chances);
     }
+
+    public static final ProbabilityLootTable PART_DRILL;
+    static {
+        EnumMap<Material, Float> chances = new EnumMap<>(Material.class);
+        chances.put(Material.NETHERRACK, 0.1f);
+        chances.put(Material.WARPED_HYPHAE, 0.1f);
+        chances.put(Material.CRIMSON_HYPHAE, 0.1f);
+        chances.put(Material.BASALT, 0.15f);
+        chances.put(Material.BLACKSTONE, 0.4f);
+        chances.put(Material.BLACKSTONE_STAIRS, 1f);
+        chances.put(Material.BLACKSTONE_SLAB, 1f);
+        chances.put(Material.GILDED_BLACKSTONE, 0.8f);
+        chances.put(Material.POLISHED_BLACKSTONE_BRICKS, 1f);
+        chances.put(Material.POLISHED_BASALT, 1f);
+        chances.put(Material.CRACKED_POLISHED_BLACKSTONE_BRICKS, 0.9f);
+        chances.put(Material.POLISHED_BLACKSTONE_BRICK_STAIRS, 1f);
+        chances.put(Material.CHISELED_POLISHED_BLACKSTONE, 1f);
+        chances.put(Material.NETHER_BRICKS, 0.5f);
+        chances.put(Material.NETHER_BRICK_FENCE, 0.5f);
+        PART_DRILL = new ProbabilityLootTable(ItemStacks.ANCIENT_PART, chances);
+    }
 }

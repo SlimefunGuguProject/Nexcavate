@@ -8,6 +8,7 @@ import me.char321.nexcavate.Nexcavate;
 import me.char321.nexcavate.items.assemblers.Assembler;
 import me.char321.nexcavate.items.machines.BlackstoneCast;
 import me.char321.nexcavate.items.machines.PartExtractor;
+import me.char321.nexcavate.items.misc.CivilizationCore;
 import me.char321.nexcavate.items.misc.ItemHolder;
 import me.char321.nexcavate.items.stations.ResearchStation;
 import me.char321.nexcavate.slimefun.NEAssembly;
@@ -25,6 +26,7 @@ import org.bukkit.inventory.ItemStack;
 import javax.annotation.Nonnull;
 
 import static me.char321.nexcavate.structure.piece.StructurePiece.mat;
+import static me.char321.nexcavate.structure.piece.StructurePiece.sf;
 import static me.char321.nexcavate.structure.piece.StructurePiece.u;
 import static me.char321.nexcavate.structure.piece.StructurePiece.wrap;
 import static org.bukkit.Material.*;
@@ -45,15 +47,21 @@ public class Items {
     public static ResearchStation RESEARCH_TABLE;
 
     public static RediscoveryPickaxe REDISCOVERY_PICKAXE;
+    public static RediscoveryPickaxe PART_DRILL;
 
     public static Assembler BASIC_ASSEMBLER;
+    public static Assembler ADVANCED_ASSEMBLER;
 
     public static BlackstoneCast BLACKSTONE_CAST;
     public static PartExtractor PART_EXTRACTOR;
+    public static PartExtractor PART_EXTRACTOR_2;
 
-    public static NEAssembly ITEM_HOLDER;
+    public static ItemHolder ITEM_HOLDER;
 
     public static NEItem ANCIENT_PART;
+    public static NEAssembly UPGRADE_CORE;
+
+    public static CivilizationCore CIVILIZATION_CORE;
 
     public static void init() {
         StructurePiece lantern = u(new CustomItemStack(LANTERN, "Lantern/Soul Lantern"), mat(LANTERN), mat(SOUL_LANTERN));
@@ -81,7 +89,7 @@ public class Items {
                         {mat(SMOOTH_QUARTZ), mat(NETHERITE_BLOCK), mat(NETHERITE_BLOCK), mat(SMOOTH_QUARTZ)},
                         {mat(SMOOTH_QUARTZ), mat(SMOOTH_QUARTZ), mat(SMOOTH_QUARTZ), mat(SMOOTH_QUARTZ)},
                 }, {
-                        {mat(SMOOTH_QUARTZ), mat(FLETCHING_TABLE), mat(BASALT), mat(SMOOTH_QUARTZ)}, //TODO analysis core
+                        {mat(SMOOTH_QUARTZ), mat(FLETCHING_TABLE), sf("NE_UPGRADE_CORE"), mat(SMOOTH_QUARTZ)},
                         {mat(WHITE_STAINED_GLASS_PANE), mat(AIR), mat(AIR), mat(WHITE_STAINED_GLASS_PANE)},
                         {mat(WHITE_STAINED_GLASS_PANE), mat(AIR), mat(AIR), mat(WHITE_STAINED_GLASS_PANE)},
                         {mat(WHITE_STAINED_GLASS_PANE), mat(AIR), mat(AIR), mat(WHITE_STAINED_GLASS_PANE)},
@@ -109,6 +117,13 @@ public class Items {
                 null, stick, null
         }, LootTables.REDISCOVERY_PICKAXE);
         REDISCOVERY_PICKAXE.register();
+
+        PART_DRILL = new RediscoveryPickaxe(ItemStacks.PART_DRILL, "NE_PART_DRILL", RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
+                ItemStacks.ANCIENT_PART, ItemStacks.REDISCOVERY_PICKAXE, ItemStacks.ANCIENT_PART,
+                null, ItemStacks.UPGRADE_CORE, null,
+                null, ItemStacks.UPGRADE_CORE, null
+        }, LootTables.PART_DRILL);
+        PART_DRILL.register();
 
         StructurePiece any = new AnyStructurePiece();
         StructurePiece extension = u(new CustomItemStack(POLISHED_BLACKSTONE_BRICKS, "Assembler Extension", "&7Any Assembler extension, or Polished Blackstone Bricks."), mat(POLISHED_BLACKSTONE_BRICKS));
@@ -147,6 +162,58 @@ public class Items {
 
         }, new int[]{0, 4, 2}));
         BASIC_ASSEMBLER.register();
+        ADVANCED_ASSEMBLER = new Assembler(ItemStacks.ADVANCED_ASSEMBLER, "NE_ADVANCED_ASSEMBLER", new Structure(new StructurePiece[][][]{
+                {
+                        {mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS)},
+                        {mat(POLISHED_BLACKSTONE_BRICKS), mat(CHISELED_POLISHED_BLACKSTONE), mat(CHISELED_POLISHED_BLACKSTONE), mat(CHISELED_POLISHED_BLACKSTONE), mat(CHISELED_POLISHED_BLACKSTONE), mat(POLISHED_BLACKSTONE_BRICKS)},
+                        {mat(POLISHED_BLACKSTONE_BRICKS), mat(CHISELED_POLISHED_BLACKSTONE), mat(NETHERITE_BLOCK), mat(NETHERITE_BLOCK), mat(CHISELED_POLISHED_BLACKSTONE), mat(POLISHED_BLACKSTONE_BRICKS)},
+                        {mat(POLISHED_BLACKSTONE_BRICKS), mat(CHISELED_POLISHED_BLACKSTONE), mat(NETHERITE_BLOCK), mat(NETHERITE_BLOCK), mat(CHISELED_POLISHED_BLACKSTONE), mat(POLISHED_BLACKSTONE_BRICKS)},
+                        {mat(POLISHED_BLACKSTONE_BRICKS), mat(CHISELED_POLISHED_BLACKSTONE), mat(CHISELED_POLISHED_BLACKSTONE), mat(CHISELED_POLISHED_BLACKSTONE), mat(CHISELED_POLISHED_BLACKSTONE), mat(POLISHED_BLACKSTONE_BRICKS)},
+                        {mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS), mat(QUARTZ_PILLAR), mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS)},
+                },
+                {
+                        {mat(BLACKSTONE), mat(GRAY_STAINED_GLASS), mat(GRAY_STAINED_GLASS), mat(GRAY_STAINED_GLASS), mat(GRAY_STAINED_GLASS), mat(BLACKSTONE)},
+                        {mat(GRAY_STAINED_GLASS), any, any, any, any, mat(GRAY_STAINED_GLASS)},
+                        {mat(GRAY_STAINED_GLASS), any, any, any, any, mat(GRAY_STAINED_GLASS)},
+                        {mat(GRAY_STAINED_GLASS), any, any, any, any, mat(GRAY_STAINED_GLASS)},
+                        {mat(GRAY_STAINED_GLASS), any, any, any, any, mat(GRAY_STAINED_GLASS)},
+                        {mat(BLACKSTONE), mat(AIR), mat(AIR), mat(AIR), mat(AIR), mat(BLACKSTONE)}
+                },
+                {
+                        {mat(BLACKSTONE), mat(GRAY_STAINED_GLASS), mat(GRAY_STAINED_GLASS), mat(GRAY_STAINED_GLASS), mat(GRAY_STAINED_GLASS), mat(BLACKSTONE)},
+                        {mat(GRAY_STAINED_GLASS), any, any, any, any, mat(GRAY_STAINED_GLASS)},
+                        {mat(GRAY_STAINED_GLASS), any, any, any, any, mat(GRAY_STAINED_GLASS)},
+                        {mat(GRAY_STAINED_GLASS), any, any, any, any, mat(GRAY_STAINED_GLASS)},
+                        {mat(GRAY_STAINED_GLASS), any, any, any, any, mat(GRAY_STAINED_GLASS)},
+                        {mat(BLACKSTONE), mat(AIR), mat(AIR), mat(AIR), mat(AIR), mat(BLACKSTONE)}
+                },
+                {
+                        {mat(BLACKSTONE), mat(GRAY_STAINED_GLASS), mat(GRAY_STAINED_GLASS), mat(GRAY_STAINED_GLASS), mat(GRAY_STAINED_GLASS), mat(BLACKSTONE)},
+                        {mat(GRAY_STAINED_GLASS), any, any, any, any, mat(GRAY_STAINED_GLASS)},
+                        {mat(GRAY_STAINED_GLASS), any, any, any, any, mat(GRAY_STAINED_GLASS)},
+                        {mat(GRAY_STAINED_GLASS), any, any, any, any, mat(GRAY_STAINED_GLASS)},
+                        {mat(GRAY_STAINED_GLASS), any, any, any, any, mat(GRAY_STAINED_GLASS)},
+                        {mat(BLACKSTONE), mat(AIR), mat(AIR), mat(AIR), mat(AIR), mat(BLACKSTONE)}
+                },
+                {
+                        {mat(BLACKSTONE), mat(GRAY_STAINED_GLASS), mat(GRAY_STAINED_GLASS), mat(GRAY_STAINED_GLASS), mat(GRAY_STAINED_GLASS), mat(BLACKSTONE)},
+                        {mat(GRAY_STAINED_GLASS), any, any, any, any, mat(GRAY_STAINED_GLASS)},
+                        {mat(GRAY_STAINED_GLASS), any, any, any, any, mat(GRAY_STAINED_GLASS)},
+                        {mat(GRAY_STAINED_GLASS), any, any, any, any, mat(GRAY_STAINED_GLASS)},
+                        {mat(GRAY_STAINED_GLASS), any, any, any, any, mat(GRAY_STAINED_GLASS)},
+                        {mat(BLACKSTONE), mat(AIR), mat(AIR), mat(AIR), mat(AIR), mat(BLACKSTONE)}
+                },
+                {
+                        {mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS)},
+                        {mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS)},
+                        {mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS), sf("NE_UPGRADE_CORE"), sf("NE_UPGRADE_CORE"), mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS)},
+                        {mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS), sf("NE_UPGRADE_CORE"), sf("NE_UPGRADE_CORE"), mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS)},
+                        {mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS)},
+                        {mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS)},
+                }
+        }, new int[]{0, 5, 3}));
+        ADVANCED_ASSEMBLER.setNetherRequired(true);
+        ADVANCED_ASSEMBLER.register();
 
         StructurePiece ancientPart = wrap(ItemStacks.ANCIENT_PART);
         BLACKSTONE_CAST = new BlackstoneCast(ItemStacks.BLACKSTONE_CAST, "NE_BLACKSTONE_CAST", new Structure(new StructurePiece[][][]{
@@ -185,6 +252,33 @@ public class Items {
                 }
         }, new int[]{0, 0, 0}), 12, 6, 3);
         PART_EXTRACTOR.register();
+        PART_EXTRACTOR_2 = new PartExtractor(ItemStacks.PART_EXTRACTOR_2, "NE_PART_EXTRACTOR_2", new Structure(new StructurePiece[][][]{
+                {
+                        {mat(NETHER_BRICKS), mat(NETHER_BRICKS), mat(NETHER_BRICKS), mat(NETHER_BRICKS)},
+                        {mat(NETHER_BRICKS), mat(NETHER_BRICKS), mat(NETHER_BRICKS), mat(NETHER_BRICKS)},
+                        {mat(NETHER_BRICKS), mat(NETHER_BRICKS), mat(NETHER_BRICKS), mat(NETHER_BRICKS)},
+                        {mat(NETHER_BRICKS), mat(NETHER_BRICKS), mat(NETHER_BRICKS), mat(NETHER_BRICKS)},
+                },
+                {
+                        {ancientPart, mat(AIR), mat(AIR), ancientPart},
+                        {mat(AIR), sf("NE_PART_EXTRACTOR"), sf("NE_UPGRADE_CORE"), mat(AIR)},
+                        {mat(AIR), mat(AIR), mat(AIR), mat(AIR)},
+                        {ancientPart, mat(AIR), mat(AIR), ancientPart}
+                },
+                {
+                        {ancientPart, mat(AIR), mat(AIR), ancientPart},
+                        {mat(AIR), mat(AIR), mat(AIR), mat(AIR)},
+                        {mat(AIR), mat(AIR), mat(AIR), mat(AIR)},
+                        {ancientPart, mat(AIR), mat(AIR), ancientPart},
+                },
+                {
+                        {mat(NETHER_BRICKS), mat(NETHER_BRICKS), mat(NETHER_BRICKS), mat(NETHER_BRICKS)},
+                        {mat(NETHER_BRICKS), mat(NETHER_BRICKS), mat(NETHER_BRICKS), mat(NETHER_BRICKS)},
+                        {mat(NETHER_BRICKS), mat(NETHER_BRICKS), mat(NETHER_BRICKS), mat(NETHER_BRICKS)},
+                        {mat(NETHER_BRICKS), mat(NETHER_BRICKS), mat(NETHER_BRICKS), mat(NETHER_BRICKS)},
+                }
+        }), 24, 12, 1);
+        PART_EXTRACTOR_2.register();
 
         ITEM_HOLDER = new ItemHolder(ItemStacks.ITEM_HOLDER, "NE_ITEM_HOLDER", new Structure(new StructurePiece[][][]{
                 {
@@ -206,6 +300,53 @@ public class Items {
 
         ANCIENT_PART = new NEItem(ItemStacks.ANCIENT_PART, "NE_ANCIENT_PART");
         ANCIENT_PART.register();
+
+        UPGRADE_CORE = new NEAssembly(ItemStacks.UPGRADE_CORE, "NE_UPGRADE_CORE", new Structure(new StructurePiece[][][]{
+                {
+                        {ancientPart, mat(POLISHED_BLACKSTONE_BRICKS), ancientPart},
+                        {mat(POLISHED_BLACKSTONE_BRICKS), mat(NETHER_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS)},
+                        {ancientPart, mat(POLISHED_BLACKSTONE_BRICKS), ancientPart},
+                },
+                {
+                        {mat(NETHER_BRICKS), mat(AIR), mat(NETHER_BRICKS)},
+                        {mat(AIR), mat(TARGET), mat(AIR)},
+                        {mat(NETHER_BRICKS), mat(AIR), mat(NETHER_BRICKS)}
+                },
+                {
+                        {ancientPart, mat(POLISHED_BLACKSTONE_BRICKS), ancientPart},
+                        {mat(POLISHED_BLACKSTONE_BRICKS), mat(NETHER_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS)},
+                        {ancientPart, mat(POLISHED_BLACKSTONE_BRICKS), ancientPart},
+                }
+        }));
+        UPGRADE_CORE.register();
+
+        CIVILIZATION_CORE = new CivilizationCore(ItemStacks.CIVILIZATION_CORE, "NE_CIVILIZATION_CORE", new Structure(new StructurePiece[][][]{
+                {
+                        {mat(POLISHED_BLACKSTONE_BRICKS), mat(NETHER_BRICKS), mat(NETHER_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS)},
+                        {mat(NETHER_BRICKS), mat(MAGMA_BLOCK), mat(MAGMA_BLOCK), mat(NETHER_BRICKS)},
+                        {mat(NETHER_BRICKS), mat(MAGMA_BLOCK), mat(MAGMA_BLOCK), mat(NETHER_BRICKS)},
+                        {mat(POLISHED_BLACKSTONE_BRICKS), mat(NETHER_BRICKS), mat(NETHER_BRICKS), mat(POLISHED_BLACKSTONE_BRICKS)}
+                },
+                {
+                        {mat(POLISHED_BLACKSTONE_BRICKS), mat(AIR), mat(AIR), mat(POLISHED_BLACKSTONE_BRICKS)},
+                        {mat(AIR), sf("NE_BLACKSTONE_CAST"), sf("NE_BLACKSTONE_CAST"), mat(AIR)},
+                        {mat(AIR), sf("NE_BLACKSTONE_CAST"), sf("NE_BLACKSTONE_CAST"), mat(AIR)},
+                        {mat(POLISHED_BLACKSTONE_BRICKS), mat(AIR), mat(AIR), mat(POLISHED_BLACKSTONE_BRICKS)},
+                },
+                {
+                        {mat(POLISHED_BLACKSTONE_BRICKS), mat(AIR), mat(AIR), mat(POLISHED_BLACKSTONE_BRICKS)},
+                        {mat(AIR), sf("NE_PART_EXTRACTOR_2"), sf("NE_PART_EXTRACTOR_2"), mat(AIR)},
+                        {mat(AIR), sf("NE_PART_EXTRACTOR_2"), sf("NE_PART_EXTRACTOR_2"), mat(AIR)},
+                        {mat(POLISHED_BLACKSTONE_BRICKS), mat(AIR), mat(AIR), mat(POLISHED_BLACKSTONE_BRICKS)},
+                },
+                {
+                        {mat(POLISHED_BLACKSTONE_BRICKS), mat(AIR), mat(AIR), mat(POLISHED_BLACKSTONE_BRICKS)},
+                        {mat(AIR), mat(CONDUIT), mat(CONDUIT), mat(AIR)},
+                        {mat(AIR), mat(CONDUIT), mat(CONDUIT), mat(AIR)},
+                        {mat(POLISHED_BLACKSTONE_BRICKS), mat(AIR), mat(AIR), mat(POLISHED_BLACKSTONE_BRICKS)},
+                }
+        }));
+        CIVILIZATION_CORE.register();
     }
 
 }

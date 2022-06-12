@@ -10,4 +10,4 @@ My entry for the 2022 Addon Jam.
 
 *For the Addon Jam, some adjustments have been made to the items for a quicker judging process.*
 
-For a tutorial/walkthrough, see [TUTORIAL.md](https://github.com/qwertyuioplkjhgfd/Nexcavate/blob/main/TUTORIAL.md) (spoilers)
+For a tutorial/walkthrough, see [TUTORIAL.md](https://github.com/qwertyuioplkjhgfd/Nexcavate/blob/main/TUTORIAL.md)
