@@ -29,7 +29,7 @@ public class StructureScreenHandler implements NEGUIInventoryHolder {
 
     public StructureScreenHandler(int size) {
         this.size = size;
-        this.inventory = Bukkit.createInventory(this, size * 9, "Structure Viewer");
+        this.inventory = Bukkit.createInventory(this, size * 9, "结构预览");
     }
 
     @Override
@@ -57,7 +57,7 @@ public class StructureScreenHandler implements NEGUIInventoryHolder {
     }
 
     public void refresh() {
-        inventory.setItem(0, new CustomItemStack(Material.ARROW, "&fBack"));
+        inventory.setItem(0, new CustomItemStack(Material.ARROW, "&f返回"));
         inventory.setItem(9, display);
         for (int i = 18; i < size * 9; i += 9) {
             inventory.setItem(i, BACKGROUND);
@@ -67,12 +67,12 @@ public class StructureScreenHandler implements NEGUIInventoryHolder {
         }
         int layernum = 1;
         for (int i = size * 9 - 1; i > 0; i -= 9) {
-            ItemStack layerItem = new CustomItemStack(Material.SNOW, "&eLayer " + layernum);
+            ItemStack layerItem = new CustomItemStack(Material.SNOW, "&e层 " + layernum);
             if (layernum - 1 == layer) {
                 ItemMeta im = layerItem.getItemMeta();
                 im.addEnchant(Enchantment.DURABILITY, 1, true);
                 im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                im.setDisplayName(im.getDisplayName() + ChatColor.GRAY + " (selected)");
+                im.setDisplayName(im.getDisplayName() + ChatColor.GRAY + " (当前层数)");
                 layerItem.setItemMeta(im);
             }
             inventory.setItem(i, layerItem);
