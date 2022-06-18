@@ -19,7 +19,7 @@ public class ItemStacks {
         im.addEnchant(Enchantment.DURABILITY, 2, false);
         im.addEnchant(Enchantment.DIG_SPEED, 1, false);
     });
-    public static final ItemStack PART_DRILL = new SlimefunItemStack("NE_PART_DRILL", Material.DIAMOND_PICKAXE, "&考古钻头", im -> {
+    public static final ItemStack PART_DRILL = new SlimefunItemStack("NE_PART_DRILL", Material.DIAMOND_PICKAXE, "&c考古钻头", im -> {
         im.setLore(List.of(ChatColor.GRAY + "提取古代零件的高级工具"));
         im.addEnchant(Enchantment.DURABILITY, 3, false);
         im.addEnchant(Enchantment.DIG_SPEED, 5, false);
@@ -32,11 +32,11 @@ public class ItemStacks {
 
     public static final ItemStack ITEM_HOLDER = new SlimefunItemStack("NE_ITEM_HOLDER", Material.CYAN_STAINED_GLASS, "&f物品架", "&7储存部分物品", "&7物品架中的物品可在装配机中使用");
 
-    public static final ItemStack BASIC_ASSEMBLER = new CustomItemStack(Material.CHISELED_QUARTZ_BLOCK, "&e基础装配机", "&7装配小范围3x3x3内的物品");
-    public static final ItemStack ADVANCED_ASSEMBLER = new CustomItemStack(Material.QUARTZ_PILLAR, "&d高级装配机", "&7装配大范围4x4x4内的物品", "仅在下界工作");
+    public static final ItemStack BASIC_ASSEMBLER = new CustomItemStack(Material.CHISELED_QUARTZ_BLOCK, "&e基础装配机", "&7装配小范围3x3x3内的方块");
+    public static final ItemStack ADVANCED_ASSEMBLER = new CustomItemStack(Material.QUARTZ_PILLAR, "&d高级装配机", "&7装配大范围4x4x4内的方块", "&8仅在下界工作");
 
     public static final ItemStack ANCIENT_PART = new SlimefunItemStack("NE_ANCIENT_PART", Material.NETHER_BRICK, "&e古代零件", "&7古代文明的遗迹");
-    public static final ItemStack UPGRADE_CORE = new SlimefunItemStack("NE_UPGRADE_CORE", Material.TARGET, "&e古代升级核心", "&7可用于升级机器");
+    public static final ItemStack UPGRADE_CORE = new SlimefunItemStack("NE_UPGRADE_CORE", Material.TARGET, "&e古代升级核心", "&7先进文明遗留下的产物");
 
     public static final ItemStack CIVILIZATION_CORE = new SlimefunItemStack("NE_CIVILIZATION_CORE", Material.CONDUIT, "&b文明核心", "&d拥有远古下界文明的元素", "&d用于唤醒 &kasdfg hijklmn &d文明");
 
