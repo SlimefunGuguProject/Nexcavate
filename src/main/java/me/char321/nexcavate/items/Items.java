@@ -69,8 +69,8 @@ public class Items {
     };
     public static final RecipeType DUMMY_TYPE = new RecipeType(Nexcavate.key("invalid"), new CustomItemStack(
             Material.BARRIER,
-            "&l&4You're viewing this recipe wrong!",
-            "&7View the recipe through a Nexcavate research station."));
+            "&l&4无效配方!",
+            "&7通过文明研究台查看配方"));
 
     public static ResearchStation RESEARCH_LAB;
     public static ResearchStation RESEARCH_TABLE;
