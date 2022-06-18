@@ -36,7 +36,7 @@ public class ItemStacks {
     public static final ItemStack ADVANCED_ASSEMBLER = new CustomItemStack(Material.QUARTZ_PILLAR, "&d高级装配机", "&7装配大范围4x4x4内的物品", "仅在下界工作");
 
     public static final ItemStack ANCIENT_PART = new SlimefunItemStack("NE_ANCIENT_PART", Material.NETHER_BRICK, "&e古代零件", "&7古代文明的遗迹");
-    public static final ItemStack UPGRADE_CORE = new SlimefunItemStack("NE_UPGRADE_CORE", Material.TARGET, "&e古代升级核心", "&7可用于升级机器");
+    public static final ItemStack UPGRADE_CORE = new SlimefunItemStack("NE_UPGRADE_CORE", Material.TARGET, "&e古代升级核心", "&7先进文明遗留下的产物");
 
     public static final ItemStack CIVILIZATION_CORE = new SlimefunItemStack("NE_CIVILIZATION_CORE", Material.CONDUIT, "&b文明核心", "&d拥有远古下界文明的元素", "&d用于唤醒 &kasdfg hijklmn &d文明");
 
