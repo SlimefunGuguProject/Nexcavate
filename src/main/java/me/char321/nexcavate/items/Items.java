@@ -69,8 +69,8 @@ public class Items {
     };
     public static final RecipeType DUMMY_TYPE = new RecipeType(Nexcavate.key("invalid"), new CustomItemStack(
             Material.BARRIER,
-            "&l&4无效配方!",
-            "&7通过文明研究台查看配方"));
+            "&l&4当前无法查看配方!",
+            "&7请通过文明研究台查看配方"));
 
     public static ResearchStation RESEARCH_LAB;
     public static ResearchStation RESEARCH_TABLE;
@@ -93,7 +93,7 @@ public class Items {
     public static CivilizationCore CIVILIZATION_CORE;
 
     public static void init() {
-        StructurePiece lantern = u(new CustomItemStack(LANTERN, "Lantern/Soul Lantern"), mat(LANTERN), mat(SOUL_LANTERN));
+        StructurePiece lantern = u(new CustomItemStack(LANTERN, "灯笼/灵魂灯笼"), mat(LANTERN), mat(SOUL_LANTERN));
         RESEARCH_TABLE = new ResearchStation(ItemStacks.RESEARCH_TABLE, "NE_RESEARCH_TABLE", new Structure(new StructurePiece[][][]{
                 {
                         {mat(SMOOTH_QUARTZ), mat(SMOOTH_QUARTZ), mat(SMOOTH_QUARTZ)},
@@ -155,7 +155,7 @@ public class Items {
         PART_DRILL.register();
 
         StructurePiece any = new AnyStructurePiece();
-        StructurePiece extension = u(new CustomItemStack(POLISHED_BLACKSTONE_BRICKS, "Assembler Extension", "&7Any Assembler extension, or Polished Blackstone Bricks."), mat(POLISHED_BLACKSTONE_BRICKS));
+        StructurePiece extension = u(new CustomItemStack(POLISHED_BLACKSTONE_BRICKS, "组装机零件", "&7任意组装机零件或磨制黑石砖"), mat(POLISHED_BLACKSTONE_BRICKS));
         BASIC_ASSEMBLER = new Assembler(ItemStacks.BASIC_ASSEMBLER, "NE_BASIC_ASSEMBLER", new Structure(new StructurePiece[][][]{
                 {
                         {extension, extension, extension, extension, extension},
