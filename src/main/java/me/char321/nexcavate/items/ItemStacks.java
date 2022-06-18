@@ -11,8 +11,8 @@ import org.bukkit.inventory.ItemStack;
 import java.util.List;
 
 public class ItemStacks {
-    public static final ItemStack RESEARCH_TABLE = new CustomItemStack(Material.CARTOGRAPHY_TABLE, "&e研究台", "&7允许你研究基础物品");
-    public static final ItemStack RESEARCH_LAB = new CustomItemStack(Material.FLETCHING_TABLE, "&e研究实验室", "&7允许你研究高级物品");
+    public static final ItemStack RESEARCH_TABLE = new CustomItemStack(Material.CARTOGRAPHY_TABLE, "&e文明研究台", "&7允许你研究基础物品");
+    public static final ItemStack RESEARCH_LAB = new CustomItemStack(Material.FLETCHING_TABLE, "&e文明研究实验室", "&7允许你研究高级物品");
 
     public static final ItemStack REDISCOVERY_PICKAXE = new SlimefunItemStack("NE_REDISCOVERY_PICKAXE", Material.WOODEN_PICKAXE, "&e考古镐", im -> {
         im.setLore(List.of(ChatColor.GRAY + "提取古代零件的基础工具"));
