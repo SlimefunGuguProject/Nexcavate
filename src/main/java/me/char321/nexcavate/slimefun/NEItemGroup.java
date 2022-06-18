@@ -15,7 +15,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 public class NEItemGroup extends FlexItemGroup {
     public static void init() {
-        ItemStack groupitem = new CustomItemStack(Material.BLACKSTONE, "&5Nexcavate", "&7Begin your reconstruction journey.");
+        ItemStack groupitem = new CustomItemStack(Material.BLACKSTONE, "&5文明复兴", "&7开始你的重建文明之旅");
         NEItemGroup group = new NEItemGroup(Nexcavate.key("nexcavate"), groupitem);
         group.register(Nexcavate.instance());
     }
