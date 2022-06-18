@@ -32,44 +32,44 @@ public class CivilizationCore extends NEAssembly {
         player.playSound(player, Sound.BLOCK_END_PORTAL_SPAWN, 1, 1);
         Utils.runWithDelay(80L,
                 () -> {
-                    player.sendMessage(Utils.color("&dYou place down the Civilization Core."));
+                    player.sendMessage(Utils.color("&d你放置了一个文明和谐"));
                 }, () -> {
                     player.playSound(player, Sound.ENTITY_PIGLIN_RETREAT, 1, 0.5f);
-                    player.sendMessage(Utils.color("&9&oWhat? Who has awaken me from my slumber?"));
+                    player.sendMessage(Utils.color("&9&o什么？是谁把我从沉睡中唤醒？"));
                 }, () -> {
                     player.playSound(player, Sound.ENTITY_PIGLIN_ADMIRING_ITEM, 1, 0.5f);
-                    player.sendMessage(Utils.color("&a&oWait...what is that thing?"));
+                    player.sendMessage(Utils.color("&a&o等等...那是什么东西?"));
                 }, () -> {
                     player.playSound(player, Sound.ENTITY_PIGLIN_RETREAT, 1, 0.5f);
-                    player.sendMessage(Utils.color("&9&oIt says &e" + player.getName() + " &9&o above."));
+                    player.sendMessage(Utils.color("&9&o上面写着&e" + player.getName() + ""));
                 }, () -> {
                     player.playSound(player, Sound.ENTITY_PIGLIN_RETREAT, 1, 0.5f);
-                    player.sendMessage(Utils.color("&9&oAnd they've built...our civilization. Are those our assemblers?"));
+                    player.sendMessage(Utils.color("&9&o他们重建了...我们的文明。那些是我们的建筑工吗?"));
                 }, () -> {
                     player.playSound(player, Sound.ENTITY_PIGLIN_ADMIRING_ITEM, 1, 0.5f);
-                    player.sendMessage(Utils.color("&a&oHow did they even get the parts to build that?"));
+                    player.sendMessage(Utils.color("&a&o他们是怎么得到建造它的零件的?"));
                 }, () -> {
                     player.playSound(player, Sound.ENTITY_PIGLIN_RETREAT, 1, 0.5f);
-                    player.sendMessage(Utils.color("&9&oThey must be from the Overworld."));
+                    player.sendMessage(Utils.color("&9&o他们一定是从另一个世界穿越而来"));
                 }, () -> {
                     player.playSound(player, Sound.ENTITY_PIGLIN_ADMIRING_ITEM, 1, 0.5f);
-                    player.sendMessage(Utils.color("&a&oSee? I TOLD you someone was gonna come along to save us! I knew it!"));
+                    player.sendMessage(Utils.color("&a&o看到了吗？我告诉过你有人会来救我们的！我就知道！"));
                 }, () -> {
                     player.playSound(player, Sound.ENTITY_PIGLIN_RETREAT, 1, 0.5f);
-                    player.sendMessage(Utils.color("&9&oYeah, sure. It only took like, 179,000 years since &eThe Great Eradication."));
+                    player.sendMessage(Utils.color("&9&o是啊，当然。自从那次大规模灭绝以来，只花了大概179000年。"));
                 }, () -> {
                     player.playSound(player, Sound.ENTITY_PIGLIN_ADMIRING_ITEM, 1, 0.5f);
-                    player.sendMessage(Utils.color("&a&oWell, you should still be grateful that &e" + player.getName() + "&a&o saved us."));
+                    player.sendMessage(Utils.color("&a&o嗯，你还是应该感激 &e" + player.getName() + "&a&o救了我们"));
                 }, () -> {
                     player.playSound(player, Sound.ENTITY_PIGLIN_RETREAT, 1, 0.5f);
-                    player.sendMessage(Utils.color("&9&oOf course. I'm glad that our civilization can come alive after all these millennia."));
+                    player.sendMessage(Utils.color("&9&o当然了。我很高兴我们的文明在经历了几千年后还能继续存在。"));
                 }, () -> {
 
                 }, () -> {
                     player.playSound(player, Sound.MUSIC_DISC_BLOCKS, 1, 1f);
-                    player.sendMessage(Utils.color("&e&lThe End"));
+                    player.sendMessage(Utils.color("&e&l终章"));
                 }, () -> {
-                    player.sendMessage(Utils.color("&e&lThanks for playing!"));
+                    player.sendMessage(Utils.color("&e&l感谢游玩!"));
                 }
         );
     }
