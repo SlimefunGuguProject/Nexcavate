@@ -60,15 +60,15 @@ public class ResearchScreenHandler implements NEGUIInventoryHolder {
         if (research.equals(playerProgress.getCurrentResearch())) {
             PlayerProgress.ResearchProgress progress = playerProgress.getCurrentResearchProgress();
             res.setType(Material.YELLOW_STAINED_GLASS_PANE);
-            ItemMeta im = Utils.appendLore(res, "", "&7Research progress: &7" + progress.currentProgress());
+            ItemMeta im = Utils.appendLore(res, "", "&7研究进度: &7" + progress.currentProgress());
             im.getEnchants().forEach((enchantment, i) -> im.removeEnchant(enchantment));
             res.setItemMeta(im);
         } else if (!playerProgress.isResearched(research)) {
             if (research.getTier() > currentTier) {
-                res = new CustomItemStack(Material.BARRIER, "&4&lLocked", "&7A &f" + Nexcavate.instance().getRegistry().getResearchStation(research.getTier()).getItemName(), "&7is required to research this item.");
+                res = new CustomItemStack(Material.BARRIER, "&4&l锁定", "&7A &f" + Nexcavate.instance().getRegistry().getResearchStation(research.getTier()).getItemName(), "&7is required to research this item.");
             } else {
                 res.setType(Material.GRAY_STAINED_GLASS_PANE);
-                ItemMeta im = Utils.appendLore(res, "", "&7Research cost: &f" + research.getCost() + " Ancient Parts", "&7Research time: &f" + research.getTime() + " minute(s)");
+                ItemMeta im = Utils.appendLore(res, "", "&7研究耗费: &f" + research.getCost() + "古代零件", "&7时间: &f" + research.getTime() + " 分钟");
                 im.getEnchants().forEach((enchantment, i) -> im.removeEnchant(enchantment));
                 res.setItemMeta(im);
             }
@@ -90,9 +90,9 @@ public class ResearchScreenHandler implements NEGUIInventoryHolder {
             NEGUI.openRecipe(player1, researchSlots.get(e.getRawSlot()));
         } else if (currentTier >= research.getTier()) {
             if (playerProgress.getCurrentResearchProgress() != null) {
-                e.getWhoClicked().sendMessage(Utils.color("&cYou are already researching &f" + playerProgress.getCurrentResearch().getName() + "&c!"));
+                e.getWhoClicked().sendMessage(Utils.color("&c你已经在研究 &f" + playerProgress.getCurrentResearch().getName() + " &c!"));
             } else if (!canAfford(player1, research)) {
-                e.getWhoClicked().sendMessage(Utils.color("&cYou cannot afford this research! " + research.getCost() + " ancient parts are required."));
+                e.getWhoClicked().sendMessage(Utils.color("&c您无法为 " + research.getCost() + " 交付足够的古代零件"));
             } else {
                 consumeParts(player1, research);
                 playerProgress.beginResearch(research);
