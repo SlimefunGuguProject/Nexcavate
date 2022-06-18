@@ -29,7 +29,7 @@ public class ItemHolderStructurePiece implements StructurePiece {
     @Override
     public ItemStack getDisplay() {
         ItemStack clone = item.clone();
-        Utils.appendLore(clone, "", "&7Place an Item Holder at this position", "&7and put the item in it to assemble. ");
+        Utils.appendLore(clone, "", "&7在此位置放置一个物品架，并将物品放入其中进行组装 ");
         return clone;
     }
 }
