@@ -19,7 +19,7 @@ public class ItemStacks {
         im.addEnchant(Enchantment.DURABILITY, 2, false);
         im.addEnchant(Enchantment.DIG_SPEED, 1, false);
     });
-    public static final ItemStack PART_DRILL = new SlimefunItemStack("NE_PART_DRILL", Material.DIAMOND_PICKAXE, "&考古钻头", im -> {
+    public static final ItemStack PART_DRILL = new SlimefunItemStack("NE_PART_DRILL", Material.DIAMOND_PICKAXE, "&c考古钻头", im -> {
         im.setLore(List.of(ChatColor.GRAY + "提取古代零件的高级工具"));
         im.addEnchant(Enchantment.DURABILITY, 3, false);
         im.addEnchant(Enchantment.DIG_SPEED, 5, false);
