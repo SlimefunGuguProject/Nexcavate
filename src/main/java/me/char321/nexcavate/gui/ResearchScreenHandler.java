@@ -29,7 +29,7 @@ public class ResearchScreenHandler implements NEGUIInventoryHolder {
 
     public ResearchScreenHandler(UUID player) {
         this.player = player;
-        this.inventory = Bukkit.createInventory(this, 54, "Nexcavate Research");
+        this.inventory = Bukkit.createInventory(this, 54, "文明复兴研究进度");
     }
 
     @Override
