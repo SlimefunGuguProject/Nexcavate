@@ -64,9 +64,9 @@ public class NEGUI {
 
     public static void openRecipe(Player player, Research research) {
         if (research.getItem() instanceof NEStructure neStructure) {
-            openStructure(player, neStructure.getStructure(), new CustomItemStack(Material.STRUCTURE_BLOCK, "&5Structure", "&7Place all the layers of the structure", "&7in the world as shown."));
+            openStructure(player, neStructure.getStructure(), new CustomItemStack(Material.STRUCTURE_BLOCK, "&5建造", "&7如图所示，将当前结构的所有物品层放置在当前世界中"));
         } else if (research.getItem() instanceof NEAssembly neAssembly) {
-            openStructure(player, neAssembly.getStructure(), new CustomItemStack(ItemStacks.BASIC_ASSEMBLER, "&5Assembly", "&7Place all the layers of the assembly", "&7in an assembler and activate it", "&7to assemble this item."));
+            openStructure(player, neAssembly.getStructure(), new CustomItemStack(ItemStacks.BASIC_ASSEMBLER, "&5装配", "&7将组件的所有物品层放入组装机中", "&7并激活它来组装该物品"));
         } else {
             //fallback
             PlayerProfile.get(player, profile -> {
