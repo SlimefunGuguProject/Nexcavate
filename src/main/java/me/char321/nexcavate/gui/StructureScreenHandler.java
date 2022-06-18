@@ -101,8 +101,8 @@ public class StructureScreenHandler implements NEGUIInventoryHolder {
             ItemMeta im = res.getItemMeta();
             ArrayList<String> lore = im.hasLore() ? new ArrayList<>(im.getLore()) : new ArrayList<>();
             lore.add("");
-            lore.add(Utils.color("&fPlace an &eItem Holder &fat this place,"));
-            lore.add(Utils.color("&fthen put this item in it to assemble the structure."));
+            lore.add(Utils.color("&f在此放置一个&e物品架"));
+            lore.add(Utils.color("&f并将物品放入架内进行组装"));
         }
 
         return res;
