@@ -32,8 +32,8 @@ public class ItemStacks {
 
     public static final ItemStack ITEM_HOLDER = new SlimefunItemStack("NE_ITEM_HOLDER", Material.CYAN_STAINED_GLASS, "&f物品架", "&7储存部分物品", "&7物品架中的物品可在装配机中使用");
 
-    public static final ItemStack BASIC_ASSEMBLER = new CustomItemStack(Material.CHISELED_QUARTZ_BLOCK, "&e基础装配机", "&7装配小范围3x3x3内的物品");
-    public static final ItemStack ADVANCED_ASSEMBLER = new CustomItemStack(Material.QUARTZ_PILLAR, "&d高级装配机", "&7装配大范围4x4x4内的物品", "仅在下界工作");
+    public static final ItemStack BASIC_ASSEMBLER = new CustomItemStack(Material.CHISELED_QUARTZ_BLOCK, "&e基础装配机", "&7装配小范围3x3x3内的方块");
+    public static final ItemStack ADVANCED_ASSEMBLER = new CustomItemStack(Material.QUARTZ_PILLAR, "&d高级装配机", "&7装配大范围4x4x4内的方块", "&8仅在下界工作");
 
     public static final ItemStack ANCIENT_PART = new SlimefunItemStack("NE_ANCIENT_PART", Material.NETHER_BRICK, "&e古代零件", "&7古代文明的遗迹");
     public static final ItemStack UPGRADE_CORE = new SlimefunItemStack("NE_UPGRADE_CORE", Material.TARGET, "&e古代升级核心", "&7先进文明遗留下的产物");
