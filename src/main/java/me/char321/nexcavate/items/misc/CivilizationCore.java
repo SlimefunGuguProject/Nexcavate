@@ -32,7 +32,7 @@ public class CivilizationCore extends NEAssembly {
         player.playSound(player, Sound.BLOCK_END_PORTAL_SPAWN, 1, 1);
         Utils.runWithDelay(80L,
                 () -> {
-                    player.sendMessage(Utils.color("&d你放置了一个文明和谐"));
+                    player.sendMessage(Utils.color("&d你放置了一个文明核心"));
                 }, () -> {
                     player.playSound(player, Sound.ENTITY_PIGLIN_RETREAT, 1, 0.5f);
                     player.sendMessage(Utils.color("&9&o什么？是谁把我从沉睡中唤醒？"));
@@ -53,7 +53,7 @@ public class CivilizationCore extends NEAssembly {
                     player.sendMessage(Utils.color("&9&o他们一定是从另一个世界穿越而来"));
                 }, () -> {
                     player.playSound(player, Sound.ENTITY_PIGLIN_ADMIRING_ITEM, 1, 0.5f);
-                    player.sendMessage(Utils.color("&a&o看到了吗？我告诉过你有人会来救我们的！我就知道！"));
+                    player.sendMessage(Utils.color("&a&o看到了吗？我告诉过你会有人来救我们的！我就知道！"));
                 }, () -> {
                     player.playSound(player, Sound.ENTITY_PIGLIN_RETREAT, 1, 0.5f);
                     player.sendMessage(Utils.color("&9&o是啊，当然。自从那次大规模灭绝以来，只花了大概179000年。"));
